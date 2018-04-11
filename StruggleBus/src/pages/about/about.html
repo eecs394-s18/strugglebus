@@ -1,21 +1,21 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      EECS 394
+      {{ (class | async)?.name }}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h1>People Interested</h1>
-
   <ion-list>
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="">
-    </ion-avatar>
-    <h2>Name</h2>
-  </ion-item>
-</ion-list>
+
+    <ion-list-header> People Interested </ion-list-header>
+
+    <ion-item class="text" *ngFor="let person of peopleInterested | async">
+      Name: {{ person.name }}
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block (click)=addStudent()>Join Class</button>
 
 </ion-content>

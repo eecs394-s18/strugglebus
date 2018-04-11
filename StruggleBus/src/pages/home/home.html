@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Home Page
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,16 +10,10 @@
   <ion-list>
 
     <ion-list-header> Quarter: {{ (quarter | async)?.q_name }} </ion-list-header>
-    <ion-item class="text" *ngFor="let class of quarterClasses | async" (click)=open>
+    <ion-item class="text" *ngFor="let class of quarterClasses | async" [navPush]="aboutPage">
       {{ class.name }}
     </ion-item>
 
-    <ion-item class="text" *ngFor="let person of peopleInterested | async">
-      Name: {{ person.name }}
-    </ion-item>
   </ion-list>
-
-  <button ion-button block (click)=addStudent()>Join Class</button>
-
 
 </ion-content>

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
-
 export interface Class {
 	id: number;
 	name: string;
@@ -53,7 +52,7 @@ export class DatabaseProvider {
 
     	this.quarterClasses = this.quarterDoc.collection< Class > ('classes').valueChanges();
 
-			this.classDoc = afs.doc< Quarter >('quarters/2018_spring/classes/eecs394');
+			this.classDoc = afs.doc< Class >('quarters/2018_spring/classes/eecs394');
 			this.class = this.classDoc.valueChanges();
 
 			this.peopleCollection = this.classDoc.collection< Student >('people_interested');
