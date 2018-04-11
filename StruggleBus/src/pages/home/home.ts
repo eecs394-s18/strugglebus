@@ -19,8 +19,8 @@ export class HomePage {
 
 	quarterClasses: Observable< Class[] >;
 
- 
- 
+
+
 
   // constructor(public navCtrl: NavController,  private db: AngularFirestore) {
   constructor(public navCtrl: NavController, public databaseService: DatabaseProvider) {

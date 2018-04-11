@@ -18,8 +18,11 @@ export interface Quarter {
 
 
 @Injectable()
-export class DatabaseProvider {
 
+
+export class DatabaseProvider {
+// a collection of data members (specific things we can call from the database)
+// and methods (addQuarter) that interacts with firebase database
 	private quartersCollection: AngularFirestoreCollection<Quarter>;
 	quarters: Observable< Quarter[] >;
 
@@ -31,12 +34,13 @@ export class DatabaseProvider {
 
 
 
+// the actual database that's populated with data (THAT GETS UPDATED ALL THE TIME U)
   	constructor(private afs: AngularFirestore) {
     	console.log('Hello DatabaseProvider Provider');
     	this.quartersCollection = afs.collection<Quarter>('quarters');
     	this.quarters = this.quartersCollection.valueChanges();
 
-    	this.quarterDoc = afs.doc< Quarter >('quarters/2018_spring');
+    	this.quarterDoc = afs.doc< Quarter >('quarters/2018_spring/classes/eecs394');
     	this.quarter = this.quarterDoc.valueChanges();
 
     	this.quarterClasses = this.quarterDoc.collection< Class > ('classes').valueChanges();
@@ -46,4 +50,9 @@ export class DatabaseProvider {
   	addQuarter(quarter: Quarter) {
   		this.quartersCollection.add(quarter);
   	}
+
+
+		addStudent(student_in_class: Student_in_class) {
+			this.quartersCollection.add(student_in_class);
+		}
 }

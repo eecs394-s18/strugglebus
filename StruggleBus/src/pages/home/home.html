@@ -11,7 +11,7 @@
     <ion-item class="text" *ngFor="let item of items | async">
       Quarter: {{item | json}}
     </ion-item>
-    Q: {{ (quarter | async)?.q_name }} 
+    Q: {{ (quarter | async)?.people_interested }}
 
      <ion-item class="text" *ngFor="let class of quarterClasses | async">
       Class: {{class | json}}
