@@ -39,7 +39,7 @@ export class DatabaseProvider {
 	class: Observable< Class >;
 	peopleInterested: Observable< Student [] >;
 
-	private peopleCollection: AngularFirestoreCollection<Student>;
+	peopleCollection: AngularFirestoreCollection<Student>;
 
 
 	// the actual database that's populated with data (THAT GETS UPDATED ALL THE TIME U)

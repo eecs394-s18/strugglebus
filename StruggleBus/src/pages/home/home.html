@@ -8,15 +8,11 @@
 
 <ion-content padding>
   <ion-list>
-    <!-- <ion-item class="text" *ngFor="let item of items | async">
-      Quarter: {{item | json}}
-    </ion-item> -->
-    <ion-list-header> Quarter: {{ (quarter | async)?.q_name }} </ion-list-header>
 
-     <!-- <ion-item class="text" *ngFor="let class of quarterClasses | async">
-      Class: {{class | json}}
-      People: {{ class.people_interested }}
-    </ion-item> -->
+    <ion-list-header> Quarter: {{ (quarter | async)?.q_name }} </ion-list-header>
+    <ion-item class="text" *ngFor="let class of quarterClasses | async" (click)=open>
+      {{ class.name }}
+    </ion-item>
 
     <ion-item class="text" *ngFor="let person of peopleInterested | async">
       Name: {{ person.name }}
