@@ -31,7 +31,7 @@ export class DatabaseProvider {
 	private quarterDoc: AngularFirestoreDocument<Quarter>;
 	quarter: Observable< Quarter >;
 
-	quarterClassesCollection: Class[];
+	quarterClassesCollection: AngularFirestoreCollection<Class>;
 	quarterClasses: Observable< Class[] >;
 
 	// For class eecs394 (doc)
