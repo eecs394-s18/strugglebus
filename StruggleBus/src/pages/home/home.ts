@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { DatabaseProvider, Quarter, Class } from '../../providers/database/database'
-
-
+import { DatabaseProvider, Quarter, Class, Student } from '../../providers/database/database'
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AboutPage } from '../about/about';
 
 @Component({
   selector: 'page-home',
@@ -12,27 +12,39 @@ import { DatabaseProvider, Quarter, Class } from '../../providers/database/datab
 })
 
 export class HomePage {
+  aboutPage = AboutPage;
 
-	items: Observable< Quarter[] >;
-	// classes: Observable < Class[] >;
 	quarter: Observable< Quarter >;
+  quarterClasses: Observable < Class[] >;
+	quarterClassesCollection: AngularFirestoreCollection< Class >;
+  // classDocs: AngularFirestoreDocument< Class[] >;
 
-	quarterClasses: Observable< Class[] >;
-
-
-
-
-  // constructor(public navCtrl: NavController,  private db: AngularFirestore) {
   constructor(public navCtrl: NavController, public databaseService: DatabaseProvider) {
-  		this.items = this.databaseService.quarters;
-  		// this.classes = this.databaseService.classes;
+    // Get current quarter (2018 spring by default) and classes, from DB service
+  	this.quarter = this.databaseService.quarter;
+    this.quarterClasses = this.databaseService.quarterClasses;
+  	this.quarterClassesCollection = this.databaseService.quarterClassesCollection;
 
-  		this.quarter = this.databaseService.quarter;
-
-  		this.quarterClasses = this.databaseService.quarterClasses;
 	}
 
+  /*
+  getClassDocs(): void {
+    // Get an array of all classes (documents) to populate list
+    this.quarterClassesCollection.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        classDocs.push(doc);
+      })
+    })
+  }
+  */
 
+  onSelect(myClassDoc: AngularFirestoreDocument<Class>): void {
+    // Navigate to class list based on which class was selected
+    console.log(myClassDoc);
+    this.navCtrl.push(this.aboutPage, {
+      data: myClassDoc
+    });
+  }
 
   ionViewWillLoad() {
 

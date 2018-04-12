@@ -1,20 +1,20 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Find Classes
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list>
-    <ion-item class="text" *ngFor="let item of items | async">
-      Quarter: {{item | json}}
-    </ion-item>
-    Q: {{ (quarter | async)?.people_interested }}
 
-     <ion-item class="text" *ngFor="let class of quarterClasses | async">
-      Class: {{class | json}}
+    <ion-list-header> Quarter: {{ (quarter | async)?.q_name }} </ion-list-header>
+    <ion-item class="text" *ngFor="let class of quarterClasses | async"
+      (click)=onSelect(class)>
+      {{ class.name }}
     </ion-item>
+
   </ion-list>
+
 </ion-content>
