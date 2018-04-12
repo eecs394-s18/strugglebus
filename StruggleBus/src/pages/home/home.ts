@@ -12,31 +12,39 @@ import { AboutPage } from '../about/about';
 })
 
 export class HomePage {
-
   aboutPage = AboutPage;
 
-	items: Observable< Quarter[] >;
-	// classes: Observable < Class[] >;
 	quarter: Observable< Quarter >;
+  quarterClasses: Observable < Class[] >;
+	quarterClassesCollection: AngularFirestoreCollection< Class >;
+  // classDocs: AngularFirestoreDocument< Class[] >;
 
-	quarterClasses: Observable< Class[] >;
-
-  peopleInterested: Observable< Student [] >;
-  peopleCollection: AngularFirestoreCollection<Student>;
-
-
-
-  // constructor(public navCtrl: NavController,  private db: AngularFirestore) {
   constructor(public navCtrl: NavController, public databaseService: DatabaseProvider) {
-
-      this.items = this.databaseService.quarters;
-  		this.quarter = this.databaseService.quarter;
-  		this.quarterClasses = this.databaseService.quarterClasses;
+    // Get current quarter (2018 spring by default) and classes, from DB service
+  	this.quarter = this.databaseService.quarter;
+    this.quarterClasses = this.databaseService.quarterClasses;
+  	this.quarterClassesCollection = this.databaseService.quarterClassesCollection;
 
 	}
 
+  /*
+  getClassDocs(): void {
+    // Get an array of all classes (documents) to populate list
+    this.quarterClassesCollection.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        classDocs.push(doc);
+      })
+    })
+  }
+  */
 
-
+  onSelect(myClassDoc: AngularFirestoreDocument<Class>): void {
+    // Navigate to class list based on which class was selected
+    console.log(myClassDoc);
+    this.navCtrl.push(this.aboutPage, {
+      data: myClassDoc
+    });
+  }
 
   ionViewWillLoad() {
 

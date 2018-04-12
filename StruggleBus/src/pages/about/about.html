@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{ (class | async)?.name }}
+      {{ (selectedClass)?.name }}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,12 +10,13 @@
   <ion-list>
 
     <ion-list-header> People Interested </ion-list-header>
-
     <ion-item class="text" *ngFor="let person of peopleInterested | async">
-      Name: {{ person.name }}
+      {{ person.name }}
     </ion-item>
+
   </ion-list>
 
+  <!--Limit to one click  -->
   <button ion-button block (click)=addStudent()>Join Class</button>
 
 </ion-content>

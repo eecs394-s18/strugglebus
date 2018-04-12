@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Home Page
+      Find Classes
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,7 +10,8 @@
   <ion-list>
 
     <ion-list-header> Quarter: {{ (quarter | async)?.q_name }} </ion-list-header>
-    <ion-item class="text" *ngFor="let class of quarterClasses | async" [navPush]="aboutPage">
+    <ion-item class="text" *ngFor="let class of quarterClasses | async"
+      (click)=onSelect(class)>
       {{ class.name }}
     </ion-item>
 

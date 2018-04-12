@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { DatabaseProvider, Quarter, Class, Student } from '../../providers/database/database'
@@ -17,23 +17,29 @@ export class AboutPage {
 	quarter: Observable< Quarter >;
 
 	quarterClasses: Observable< Class[] >;
-  class: Observable< Class >;
+  selectedClass: Class;
 
   peopleInterested: Observable< Student [] >;
   peopleCollection: AngularFirestoreCollection<Student>;
 
-  constructor(public navCtrl: NavController, public databaseService: DatabaseProvider) {
-  		this.items = this.databaseService.quarters;
-  		this.quarter = this.databaseService.quarter;
-  		this.quarterClasses = this.databaseService.quarterClasses;
+  constructor(public navCtrl: NavController, public databaseService: DatabaseProvider,
+    public navParams: NavParams) {
 
-      this.peopleInterested = this.databaseService.peopleInterested;
-      this.peopleCollection = this.databaseService.peopleCollection;
+    // Temp, hard coded to get EECS 394 people
+    this.peopleInterested = this.databaseService.peopleInterested;
+    this.peopleCollection = this.databaseService.peopleCollection;
 
-      this.class = this.databaseService.class;
+    // Get selected class from Home page navigation
+    this.selectedClass = navParams.get('data');
+    console.log(this.selectedClass);
+
+    // Get people interested for this class
+
+
 	}
 
   addStudent(): void {
+    // Add a student to people interested
     this.peopleCollection.add({
       id: 3,
       name: "Jackie D"

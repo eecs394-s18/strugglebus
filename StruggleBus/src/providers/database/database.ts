@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 export interface Class {
 	id: number;
 	name: string;
-	people_interested: Student[];
+	people_interested: AngularFirestoreCollection<Student>;
 }
 
 export interface Quarter {
@@ -31,6 +31,7 @@ export class DatabaseProvider {
 	private quarterDoc: AngularFirestoreDocument<Quarter>;
 	quarter: Observable< Quarter >;
 
+	quarterClassesCollection: Class[];
 	quarterClasses: Observable< Class[] >;
 
 	// For class eecs394 (doc)
@@ -44,17 +45,24 @@ export class DatabaseProvider {
 	// the actual database that's populated with data (THAT GETS UPDATED ALL THE TIME U)
   	constructor(private afs: AngularFirestore) {
     	console.log('Hello DatabaseProvider Provider');
+
+			// Get collection of quarters
     	this.quartersCollection = afs.collection<Quarter>('quarters');
     	this.quarters = this.quartersCollection.valueChanges();
 
+			// Get document for specific quarter (2018 spr)
     	this.quarterDoc = afs.doc< Quarter >('quarters/2018_spring');
     	this.quarter = this.quarterDoc.valueChanges();
 
-    	this.quarterClasses = this.quarterDoc.collection< Class > ('classes').valueChanges();
+			// Get collection of classes in 2018 spring
+    	this.quarterClassesCollection = this.quarterDoc.collection< Class > ('classes');
+			this.quarterClasses = this.quarterClassesCollection.valueChanges();
 
+			// Get document for EECS 394
 			this.classDoc = afs.doc< Class >('quarters/2018_spring/classes/eecs394');
 			this.class = this.classDoc.valueChanges();
 
+			// Get collection of people in EECS 394
 			this.peopleCollection = this.classDoc.collection< Student >('people_interested');
 			this.peopleInterested = this.peopleCollection.valueChanges();
 
@@ -63,6 +71,5 @@ export class DatabaseProvider {
   	addQuarter(quarter: Quarter) {
   		this.quartersCollection.add(quarter);
   	}
-
 
 }
