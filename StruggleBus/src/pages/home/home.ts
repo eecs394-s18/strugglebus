@@ -41,6 +41,7 @@ export class HomePage {
   onSelect(myClassDoc: AngularFirestoreDocument<Class>): void {
     // Navigate to class list based on which class was selected
     console.log(myClassDoc);
+    // this.navCtrl.push -> change navigation to (this_page, with_this_data)
     this.navCtrl.push(this.aboutPage, {
       data: myClassDoc
     });
