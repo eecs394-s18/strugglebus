@@ -8,9 +8,9 @@
 			"CONDUCT_326-0": {"abbv": "326-0", "name": "Basic Conducting", "term": "4700", "school": "MUSIC", "subject": "CONDUCT"}
 		},
 		"2018_winter": {
-			"CONDUCT_323-0": {"abbv": "323-0", "name": "Marching Band Techniques", "term": "4700", "school": "MUSIC", "subject": 
-							"CONDUCT"}, 
-			"CONDUCT_326-0": {"abbv": "326-0", "name": "Basic Conducting", "term": "4700", "school": "MUSIC", "subject": "CONDUCT"}
+			"EECS_323-0": {"abbv": "323-0", "name": "Marching Band Techniques", "term": "4700", "school": "MUSIC", "subject": 
+							"EECS"}, 
+			"EECS_326-0": {"abbv": "326-0", "name": "Basic Conducting", "term": "4700", "school": "MUSIC", "subject": "EECS"}
 		}
 	}	
 }

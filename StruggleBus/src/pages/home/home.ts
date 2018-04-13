@@ -14,6 +14,7 @@ export class HomePage implements OnInit {
 
   	quarters: Observable<any[]>;
   	courses: Observable<any[]>;
+  	course: Observable<any>;
 
     aboutPage = AboutPage;
   	constructor(public navCtrl: NavController, public db: DatabaseProvider) {
@@ -27,23 +28,9 @@ export class HomePage implements OnInit {
 			.map(q => {
 				return Object.keys(q[0]);
 			});
-
-
-	    this.courses = this.db.getCourses("2018_spring")
-	    	.map (c => {
-	    		console.log(c);
-
-
-	    		var courses: any[] = [];
-
-	    		for (var i=0; i < c.length; i++) {
-	    			// rebuild the key because lost in map function call
-	    			courses.push(c[i]["subject"] + "_" + c[i]["abbv"]);
-	    		}
-
-	    		return courses;
-	    	});
 	}
+
+	
   onSelect(quarter: String) : void {
     this.navCtrl.push(this.aboutPage, {
       quarter: quarter
