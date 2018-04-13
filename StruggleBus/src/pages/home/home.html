@@ -9,10 +9,13 @@
 <ion-content padding>
   <ion-list>
 
-    <ion-list-header> Quarter: {{ (quarter | async)?.q_name }} </ion-list-header>
-    <ion-item class="text" *ngFor="let class of quarterClasses | async"
-      (click)=onSelect(class)>
-      {{ class.name }}
+    <ion-list-header> Quarter:  </ion-list-header>
+    <ion-item class="text" *ngFor="let quarter of quarters | async" >
+      {{ quarter }} 
+    </ion-item>
+
+    <ion-item class="text" *ngFor="let course of courses | async">
+      {{ course }}
     </ion-item>
 
   </ion-list>
