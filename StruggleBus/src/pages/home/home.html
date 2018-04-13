@@ -14,19 +14,7 @@
       {{ quarter }} 
     </ion-item>
 
-    <ion-list-header> Classes:  </ion-list-header>
-    <ion-item class="text" *ngFor="let course of courses | async">
-      {{ course }}
-    </ion-item>
-
-    <ion-list-header> Specific class:  </ion-list-header>
-     <ion-item class="text">
-      abbv: {{ (course | async)?.abbv }} 
-    </ion-item>
-
-    <ion-item class="text">
-      name: {{ (course | async)?.name }}
-    </ion-item>
+   
 
   </ion-list>
 
