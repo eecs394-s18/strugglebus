@@ -10,13 +10,9 @@
   <ion-list>
 
     <ion-list-header> Classes </ion-list-header>
-    <ion-item class="text" *ngFor="let course of courses | async">
+    <ion-item class="text" *ngFor="let course of courses | async" (click)="onSelect(course)">
       {{ course }}
     </ion-item>
 
   </ion-list>
-
-  <!--Limit to one click  -->
-  <button ion-button block (click)=addStudent()>{{this.buttonText}}</button>
-
 </ion-content>

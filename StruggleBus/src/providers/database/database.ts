@@ -10,7 +10,7 @@ export class Quarter {
 }
 
 export class Course {
-    constructor(public abbv, public name, public school, public subject, public term, public people_interested) {
+    constructor(public abbv, public name,  public people_interested, public school, public subject, public term) {
     	this.abbv = abbv;
     	this.name = name;
     	this.school = school;
@@ -42,6 +42,11 @@ export class DatabaseProvider {
 
   	getCourseInfo(quarter, course) {
   		let path: string = '/quarters/' + quarter + '/' + course;
+  		return this.db.list(path).valueChanges();	
+  	}
+
+  	getPeopleInterested(quarter, course) {
+  		let path: string = '/quarters/' + quarter + '/' + course + '/people_interested';
   		return this.db.list(path).valueChanges();	
   	}
 

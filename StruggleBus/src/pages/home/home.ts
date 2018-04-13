@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import { DatabaseProvider, Quarter, Course } from '../../providers/database/database'
 
 import {AboutPage} from '../about/about';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -17,6 +18,7 @@ export class HomePage implements OnInit {
   	course: Observable<any>;
 
     aboutPage = AboutPage;
+    
   	constructor(public navCtrl: NavController, public db: DatabaseProvider) {
 
 	}
