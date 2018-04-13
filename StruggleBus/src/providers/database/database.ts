@@ -46,6 +46,13 @@ export class DatabaseProvider {
   	}
 
 
+  	addInterested(quarter, course, name) {
+  		let path: string = '/quarters/' + quarter + '/' + course;
+  		const courseRef = this.db.list(path);
+  		let new_people_interested = courseRef['people_interested'] + name;
+  		courseRef.update('people_interested', { people_interested: new_people_interested });
+  	}
+
 
 
 }
