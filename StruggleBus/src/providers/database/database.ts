@@ -23,7 +23,7 @@ export class Quarter {
     constructor(public name) {
     	this.name = name;
     }
-}	
+}
 
 export class Course {
     constructor(public id, public name, public people_interested) {
@@ -31,12 +31,10 @@ export class Course {
     	this.name = name;
     	this.people_interested = people_interested;
     }
-}	
+}
 
 
 @Injectable()
-
-
 export class DatabaseProvider {
 
 	// public quarters: FirebaseListObservable<Quarter[]>;
@@ -44,8 +42,8 @@ export class DatabaseProvider {
 
   	constructor(private db: AngularFireDatabase) {
 
-  		console.log("database initalized");	
-  		
+  		console.log("database initalized");
+
   	}
 
 
@@ -54,10 +52,10 @@ export class DatabaseProvider {
   	}
 
 
- 
+
   	getCourses(quarter) {
   		let path: string = '/quarters/' + quarter;
-  		return this.db.list(path).valueChanges();	
+  		return this.db.list(path).valueChanges();
   	}
 
 

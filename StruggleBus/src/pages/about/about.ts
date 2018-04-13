@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -11,8 +11,10 @@ import { DatabaseProvider } from '../../providers/database/database'
   templateUrl: 'about.html'
 })
 
-export class AboutPage {
+export class AboutPage implements OnInit {
 
+  quarter: String;
+  courses: Observable<any[]>;
   // items: Observable<Quarter[]>;
   // // classes: Observable < Class[] >;
   // quarter: Observable<Quarter>;
@@ -24,9 +26,9 @@ export class AboutPage {
   // peopleCollection: AngularFirestoreCollection<Student>;
 
 
-  constructor(public navCtrl: NavController, public databaseService: DatabaseProvider,
+  constructor(public navCtrl: NavController, public db: DatabaseProvider,
     public navParams: NavParams) {
-
+      this.quarter = navParams.get('quarter');
     // // Temp, hard coded to get EECS 394 people
     // this.peopleInterested = this.databaseService.peopleInterested;
     // this.peopleCollection = this.databaseService.peopleCollection;
@@ -52,7 +54,22 @@ export class AboutPage {
 
   }
 
+  ngOnInit(){
+    this.courses = this.db.getCourses(this.quarter)
+      .map (c => {
+        console.log(c);
 
+
+        var courses: any[] = [];
+
+        for (var i=0; i < c.length; i++) {
+          // rebuild the key because lost in map function call
+          courses.push(c[i]["subject"] + "_" + c[i]["abbv"]);
+        }
+
+        return courses;
+      });
+  }
 
   addStudent(): void {
     // Add a student to people interested if not in class already

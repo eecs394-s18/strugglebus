@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{ (selectedClass)?.name }}
+      {{ quarter }}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -9,9 +9,9 @@
 <ion-content padding>
   <ion-list>
 
-    <ion-list-header> People Interested </ion-list-header>
-    <ion-item class="text" *ngFor="let person of peopleInterested | async">
-      {{ person.name }}
+    <ion-list-header> Classes </ion-list-header>
+    <ion-item class="text" *ngFor="let course of courses | async">
+      {{ course }}
     </ion-item>
 
   </ion-list>
