@@ -3,22 +3,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
-// export interface Class {
-// 	id: number;
-// 	name: string;
-// 	people_interested: AngularFirestoreCollection<Student>;
-// }
-
-// export interface Quarter {
-// 	name: string;
-// 	// classes: Class[];
-// }
-
-// export interface Student {
-// 	id: number;
-// 	name: string;
-// }
-
 export class Quarter {
     constructor(public name) {
     	this.name = name;
@@ -26,21 +10,19 @@ export class Quarter {
 }	
 
 export class Course {
-    constructor(public id, public name, public people_interested) {
-    	this.id = id;
+    constructor(public abbv, public name, public school, public subject, public term, public people_interested) {
+    	this.abbv = abbv;
     	this.name = name;
+    	this.school = school;
+    	this.subject = subject;
+    	this.term = term;
     	this.people_interested = people_interested;
     }
 }	
 
 
 @Injectable()
-
-
 export class DatabaseProvider {
-
-	// public quarters: FirebaseListObservable<Quarter[]>;
-
 
   	constructor(private db: AngularFireDatabase) {
 
@@ -48,17 +30,22 @@ export class DatabaseProvider {
   		
   	}
 
-
   	getQuarters() {
   		return this.db.list('/').valueChanges();
   	}
 
 
- 
   	getCourses(quarter) {
   		let path: string = '/quarters/' + quarter;
   		return this.db.list(path).valueChanges();	
   	}
+
+  	getCourseInfo(quarter, course) {
+  		let path: string = '/quarters/' + quarter + '/' + course;
+  		return this.db.list(path).valueChanges();	
+  	}
+
+
 
 
 }

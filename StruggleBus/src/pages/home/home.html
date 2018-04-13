@@ -18,6 +18,11 @@
       {{ course }}
     </ion-item>
 
+     <ion-item class="text">
+      abbv: {{ (course | async)?.abbv }}
+      name: {{ (course | async)?.name }}
+    </ion-item>
+
   </ion-list>
 
 </ion-content>
