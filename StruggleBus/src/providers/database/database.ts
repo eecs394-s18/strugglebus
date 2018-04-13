@@ -1,75 +1,64 @@
 // import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
-export interface Class {
-	id: number;
-	name: string;
-	people_interested: AngularFirestoreCollection<Student>;
-}
+// export interface Class {
+// 	id: number;
+// 	name: string;
+// 	people_interested: AngularFirestoreCollection<Student>;
+// }
 
-export interface Quarter {
-	q_name: string;
-	classes: Class[];
-}
+// export interface Quarter {
+// 	name: string;
+// 	// classes: Class[];
+// }
 
-export interface Student {
-	id: number;
-	name: string;
-}
+// export interface Student {
+// 	id: number;
+// 	name: string;
+// }
+
+export class Quarter {
+    constructor(public name) {
+    	this.name = name;
+    }
+}	
+
+export class Course {
+    constructor(public id, public name, public people_interested) {
+    	this.id = id;
+    	this.name = name;
+    	this.people_interested = people_interested;
+    }
+}	
+
 
 @Injectable()
 
 
 export class DatabaseProvider {
-// a collection of data members (specific things we can call from the database)
-// and methods (addQuarter) that interacts with firebase database
-	private quartersCollection: AngularFirestoreCollection<Quarter>;
-	quarters: Observable< Quarter[] >;
 
-	private quarterDoc: AngularFirestoreDocument<Quarter>;
-	quarter: Observable< Quarter >;
-
-	quarterClassesCollection: AngularFirestoreCollection<Class>;
-	quarterClasses: Observable< Class[] >;
-
-	// For class eecs394 (doc)
-	private classDoc: AngularFirestoreDocument<Class>;
-	class: Observable< Class >;
-	peopleInterested: Observable< Student [] >;
-
-	peopleCollection: AngularFirestoreCollection<Student>;
+	// public quarters: FirebaseListObservable<Quarter[]>;
 
 
-	// the actual database that's populated with data (THAT GETS UPDATED ALL THE TIME U)
-  	constructor(private afs: AngularFirestore) {
-    	console.log('Hello DatabaseProvider Provider');
+  	constructor(private db: AngularFireDatabase) {
 
-			// Get collection of quarters
-    	this.quartersCollection = afs.collection<Quarter>('quarters');
-    	this.quarters = this.quartersCollection.valueChanges();
-
-			// Get document for specific quarter (2018 spr)
-    	this.quarterDoc = afs.doc< Quarter >('quarters/2018_spring');
-    	this.quarter = this.quarterDoc.valueChanges();
-
-			// Get collection of classes in 2018 spring
-    	this.quarterClassesCollection = this.quarterDoc.collection< Class > ('classes');
-			this.quarterClasses = this.quarterClassesCollection.valueChanges();
-
-			// Get document for EECS 394
-			this.classDoc = afs.doc< Class >('quarters/2018_spring/classes/eecs394');
-			this.class = this.classDoc.valueChanges();
-
-			// Get collection of people in EECS 394
-			this.peopleCollection = this.classDoc.collection< Student >('people_interested');
-			this.peopleInterested = this.peopleCollection.valueChanges();
-
+  		console.log("database initalized");	
+  		
   	}
 
-  	addQuarter(quarter: Quarter) {
-  		this.quartersCollection.add(quarter);
+
+  	getQuarters() {
+  		return this.db.list('/').valueChanges();
   	}
+
+
+ 
+  	getCourses(quarter) {
+  		let path: string = '/quarters/' + quarter;
+  		return this.db.list(path).valueChanges();	
+  	}
+
 
 }

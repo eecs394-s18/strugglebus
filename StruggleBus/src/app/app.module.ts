@@ -18,14 +18,8 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { DatabaseProvider } from '../providers/database/database';
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyDtDugT9MDUCoXU6juMwBCRyERDKKwyU6o",
-  authDomain: "strugglebus-fcaf8.firebaseapp.com",
-  databaseURL: "https://strugglebus-fcaf8.firebaseio.com",
-  projectId: "strugglebus-fcaf8",
-  storageBucket: "strugglebus-fcaf8.appspot.com",
-  messagingSenderId: "97540322838"
-};
+import { environment } from '../enviornments/environment';
+
 
 
 @NgModule({
@@ -39,9 +33,8 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFirestoreModule,
     AngularFireAuthModule
   ],
   bootstrap: [IonicApp],

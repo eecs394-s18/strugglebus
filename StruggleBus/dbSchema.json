@@ -1,0 +1,35 @@
+{
+
+	"quarter": {
+		"2018_spring": {
+
+			"EECS 340": {
+					"name": "Computer Networking",
+					"professor": "John Doe",
+					"people_interested": []
+				},
+
+			"EECS 396": {
+				"name": "Software Management",
+				"professor": "John Doe",
+				"people_interested": []
+			}
+
+		},
+		"2018_winter": {
+
+			"EECS 340": {
+					"name": "Computer Networking",
+					"professor": "John Doe",
+					"people_interested": []
+				},
+
+			"EECS 396": {
+				"name": "Software Management",
+				"professor": "John Doe",
+				"people_interested": []
+			}
+
+		}
+	}
+}
