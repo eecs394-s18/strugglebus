@@ -10,7 +10,7 @@
   <ion-list>
 
     <ion-list-header> Quarter:  </ion-list-header>
-    <ion-item class="text" *ngFor="let quarter of quarters | async" >
+    <ion-item class="text" *ngFor="let quarter of quarters | async"  (click)="onSelect(quarter)">
       {{ quarter }} 
     </ion-item>
 
