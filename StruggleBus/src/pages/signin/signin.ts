@@ -1,25 +1,23 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { Facebook } from '@ionic-native/facebook';
+import { UserProvider } from '../../providers/user/user';
+import { TabsPage } from '../../pages/tabs/tabs';
 
-/**
- * Generated class for the SigninPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-@IonicPage()
 @Component({
   selector: 'page-signin',
   templateUrl: 'signin.html',
 })
 export class SigninPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SigninPage');
+  login() {
+    this.userProvider.login(this.navCtrl);
   }
 
+  bypassLogin() {
+    this.navCtrl.push(TabsPage,{}); //Go directly to homepage without logging in
+  }
 }
