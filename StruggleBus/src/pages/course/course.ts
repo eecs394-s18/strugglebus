@@ -20,17 +20,16 @@ export class CoursePage implements OnInit {
 
 	quarter: string;
 	course: string;
-  	courseInfo: Observable<any>;
-  	people_interested: Observable<any[]>;
+	courseInfo: Observable<any>;
+	people_interested: Observable<any[]>;
+	// buttonText: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public db: DatabaseProvider) {
-
-  		this.quarter = navParams.get('quarter');
-  		this.course = navParams.get('course');
+		this.quarter = navParams.get('quarter');
+		this.course = navParams.get('course');
   }
 
   ngOnInit () {
-
   	this.courseInfo = this.db.getCourseInfo(this.quarter, this.course)
   		.map(c => {
   			var course: Course; 
@@ -45,12 +44,10 @@ export class CoursePage implements OnInit {
   		});
 
   	this.people_interested = this.db.getPeopleInterested(this.quarter, this.course)
-  		.map(people => {
+			.map(people => {
 
-  			return people;
-  		});
-
-
+				return people;
+			});
   }
 
   addStudent(course: string): void {

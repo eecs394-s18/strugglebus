@@ -13,29 +13,21 @@ import {AboutPage} from '../about/about';
 
 export class HomePage implements OnInit {
 
-  	quarters: Observable<any[]>;
-  	courses: Observable<any[]>;
-  	course: Observable<any>;
-
-    aboutPage = AboutPage;
+  quarters: string[];
+  aboutPage = AboutPage;
     
-  	constructor(public navCtrl: NavController, public db: DatabaseProvider) {
-
-	}
-
+  constructor(public navCtrl: NavController, public db: DatabaseProvider) {}
 
 	ngOnInit() {
-
-		this.quarters = this.db.getQuarters()
-			.map(q => {
-				return Object.keys(q[0]);
+		this.db.getQuarters()
+			.subscribe(q => {
+        this.quarters = Object.keys(q[0]); // q is an array of one object of key 0. console.log for details
 			});
 	}
 
-	
   onSelect(quarter: String) : void {
     this.navCtrl.push(this.aboutPage, {
       quarter: quarter
-    })
+    });
   }
 }

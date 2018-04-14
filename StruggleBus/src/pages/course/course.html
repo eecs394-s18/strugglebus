@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>course</ion-title>
+    <ion-title>{{ (courseInfo | async)?.subject }} {{ (courseInfo | async)?.abbv }}</ion-title>
   </ion-navbar>
 
 </ion-header>

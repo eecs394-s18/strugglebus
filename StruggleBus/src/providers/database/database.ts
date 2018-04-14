@@ -16,7 +16,7 @@ export class Course {
     	this.school = school;
     	this.subject = subject;
     	this.term = term;
-    	this.people_interested = people_interested;
+    	// this.people_interested = people_interested;
     }
 }
 
@@ -37,7 +37,7 @@ export class DatabaseProvider {
 
   	getCourses(quarter) {
   		let path: string = '/quarters/' + quarter;
-  		return this.db.list(path).valueChanges();
+  		return this.db.list<Course>(path).valueChanges();
   	}
 
   	getCourseInfo(quarter, course) {

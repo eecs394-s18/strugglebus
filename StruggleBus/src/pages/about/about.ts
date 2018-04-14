@@ -3,8 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { DatabaseProvider } from '../../providers/database/database'
-import {CoursePage} from '../course/course';
-
+import { CoursePage } from '../course/course';
+import { Course } from "../../providers/database/database";
 
 @Component({
   selector: 'page-about',
@@ -14,7 +14,12 @@ import {CoursePage} from '../course/course';
 export class AboutPage implements OnInit {
 
   quarter: string;
-  courses: Observable<any[]>;
+  // courses: Observable<any[]>;
+  courses: Course[];
+  // filteredItems: Observable<any[]>;
+  filteredItems: Course[];
+  // courseStrings: string[];  
+  searchTerm: string;
 
   coursePage = CoursePage;
 
@@ -25,26 +30,33 @@ export class AboutPage implements OnInit {
   }
 
   ngOnInit(){
-    this.courses = this.db.getCourses(this.quarter)
-      .map (c => {
-        console.log(c);
-
-
-        var courses: any[] = [];
-
-        for (var i=0; i < c.length; i++) {
-          // rebuild the key because lost in map function call
-          courses.push(c[i]["subject"] + "_" + c[i]["abbv"]);
-        }
-
-        return courses;
-      });
+    this.db.getCourses(this.quarter)
+    .subscribe(courses => {
+      this.courses = courses;
+      this.filteredItems = courses;
+    });
   }
 
-  onSelect(course: String) : void {
+  onSearch($event: any): void {
+    this.filteredItems = this.courses;
+
+    if (this.searchTerm && this.searchTerm.trim() != '') { // null check
+      this.filteredItems = this.filteredItems.filter((course) => {
+        let title = course.subject + ' ' + course.abbv; // construct string title
+        return title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      });
+    }
+
+  }
+
+  onCancel($event: any) {
+    this.filteredItems = this.courses;
+  }
+
+  onSelect(course: Course) : void {
     this.navCtrl.push(this.coursePage, {
       quarter: this.quarter,
-      course: course
+      course: course.subject+'_'+course.abbv
     })
   }
 
