@@ -23,6 +23,7 @@ import { environment } from '../enviornments/environment';
 
 import { Facebook } from '@ionic-native/facebook';
 import { UserProvider } from '../providers/user/user';
+import { Firebase } from '@ionic-native/firebase';
 
 
 
@@ -58,7 +59,8 @@ import { UserProvider } from '../providers/user/user';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
     Facebook,
-    UserProvider
+    UserProvider,
+    Firebase
   ]
 })
 export class AppModule {}

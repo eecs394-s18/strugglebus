@@ -5,16 +5,16 @@ import { TabsPage } from '../../pages/tabs/tabs';
 import firebase from 'firebase';
 
 
-let firebase_test_config = {
-  apiKey: "AIzaSyDtDugT9MDUCoXU6juMwBCRyERDKKwyU6o",
-    authDomain: "strugglebus-fcaf8.firebaseapp.com",
-    databaseURL: "https://strugglebus-fcaf8.firebaseio.com",
-    projectId: "strugglebus-fcaf8",
-    storageBucket: "strugglebus-fcaf8.appspot.com",
-    messagingSenderId: "97540322838"
-}
-
-firebase.initializeApp(firebase_test_config)
+// let firebase_test_config = {
+//   apiKey: "AIzaSyDtDugT9MDUCoXU6juMwBCRyERDKKwyU6o",
+//     authDomain: "strugglebus-fcaf8.firebaseapp.com",
+//     databaseURL: "https://strugglebus-fcaf8.firebaseio.com",
+//     projectId: "strugglebus-fcaf8",
+//     storageBucket: "strugglebus-fcaf8.appspot.com",
+//     messagingSenderId: "97540322838"
+// }
+//
+// firebase.initializeApp(firebase_test_config)
 
 @Injectable()
 export class UserProvider {
@@ -50,6 +50,7 @@ export class UserProvider {
           // Create credential object to pass to firebase
           const facebookCredential = firebase.auth.FacebookAuthProvider
             .credential(res.authResponse.accessToken);
+          console.log("FB Credential: " + facebookCredential);
 
           firebase.auth().signInWithCredential(facebookCredential)
             .then( success => {
