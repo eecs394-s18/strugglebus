@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "97540322838",
+    "firebase_url": "https://strugglebus-fcaf8.firebaseio.com",
+    "project_id": "strugglebus-fcaf8",
+    "storage_bucket": "strugglebus-fcaf8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97540322838:android:589669d216733f11",
+        "android_client_info": {
+          "package_name": "com.c394.Strugglebus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97540322838-v1kdpc8ot0e3a16ejhak5qveb5rtcbk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm0lvfKTsC9MJ-_oKiNDpzbrXl5dJTvuc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,6 +4,18 @@ import { Facebook } from '@ionic-native/facebook';
 import { TabsPage } from '../../pages/tabs/tabs';
 import firebase from 'firebase';
 
+
+let firebase_test_config = {
+  apiKey: "AIzaSyDtDugT9MDUCoXU6juMwBCRyERDKKwyU6o",
+    authDomain: "strugglebus-fcaf8.firebaseapp.com",
+    databaseURL: "https://strugglebus-fcaf8.firebaseio.com",
+    projectId: "strugglebus-fcaf8",
+    storageBucket: "strugglebus-fcaf8.appspot.com",
+    messagingSenderId: "97540322838"
+}
+
+firebase.initializeApp(firebase_test_config)
+
 @Injectable()
 export class UserProvider {
   // Check if user logged in, holds user data
