@@ -93,4 +93,6 @@
     <engine name="browser" spec="~5.0.3" />
     <plugin name="cordova-plugin-firebase" spec="^0.1.25" />
     <engine name="ios" spec="~4.5.4" />
+    <allow-navigation href="http://10.105.141.127:8100" />
+    <allow-navigation href="http://10.1.10.139:8100" />
 </widget>

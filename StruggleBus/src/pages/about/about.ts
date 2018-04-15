@@ -3,8 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { DatabaseProvider } from '../../providers/database/database'
-// import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-
+import { CoursePage } from '../course/course';
+import { Course } from "../../providers/database/database";
 
 @Component({
   selector: 'page-about',
@@ -13,79 +13,51 @@ import { DatabaseProvider } from '../../providers/database/database'
 
 export class AboutPage implements OnInit {
 
-  quarter: String;
-  courses: Observable<any[]>;
-  // items: Observable<Quarter[]>;
-  // // classes: Observable < Class[] >;
-  // quarter: Observable<Quarter>;
+  quarter: string;
+  // courses: Observable<any[]>;
+  courses: Course[];
+  // filteredItems: Observable<any[]>;
+  filteredItems: Course[];
+  // courseStrings: string[];  
+  searchTerm: string;
 
-  // quarterClasses: Observable<Class[]>;
-  // selectedClass: Class;
-
-  // peopleInterested: Observable<Student[]>;
-  // peopleCollection: AngularFirestoreCollection<Student>;
-
+  coursePage = CoursePage;
 
   constructor(public navCtrl: NavController, public db: DatabaseProvider,
     public navParams: NavParams) {
+     
       this.quarter = navParams.get('quarter');
-    // // Temp, hard coded to get EECS 394 people
-    // this.peopleInterested = this.databaseService.peopleInterested;
-    // this.peopleCollection = this.databaseService.peopleCollection;
-    // this.isInClass = false;
-    // this.buttonText = "Join Class";
-    // // Get selected class from Home page navigation
-    // this.selectedClass = navParams.get('data');
-    // console.log(this.selectedClass);
-
-    // Get people interested for this class
-
-    // // Check if [MY_NAME] already exists in the class
-    // afs.collection<>('/quarters/2018_spring/classes/eecs394/people_interested').valueChanges().map(res=>{
-    //     return res.filter((person) => person.name == "Jackie D")
-    // }).subscribe(res => {
-    //     if (res.length > 0) { this.isInClass = true } else { this.isInClass = false }
-    // })
-
-
-    // change button text based on whether you're in the class or not
-
-
-
   }
 
   ngOnInit(){
-    this.courses = this.db.getCourses(this.quarter)
-      .map (c => {
-        console.log(c);
-
-
-        var courses: any[] = [];
-
-        for (var i=0; i < c.length; i++) {
-          // rebuild the key because lost in map function call
-          courses.push(c[i]["subject"] + "_" + c[i]["abbv"]);
-        }
-
-        return courses;
-      });
+    this.db.getCourses(this.quarter)
+    .subscribe(courses => {
+      this.courses = courses;
+      this.filteredItems = courses;
+    });
   }
 
-  addStudent(): void {
-    // Add a student to people interested if not in class already
-    // console.log(this.buttonText)
+  onSearch($event: any): void {
+    this.filteredItems = this.courses;
 
-    // Shows a different text after clicking but kind of buggy & no remove functionality
-  //   if (this.isInClass) {
-  //   this.buttonText = "Remove me from Class";
-  // }
+    if (this.searchTerm && this.searchTerm.trim() != '') { // null check
+      this.filteredItems = this.filteredItems.filter((course) => {
+        let title = course.subject + ' ' + course.abbv; // construct string title
+        return title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      });
+    }
 
-    // if (this.isInClass == false) {
-    // this.peopleCollection.add({
-    //   id: 3,
-    //   name: "Jackie D"
-    // })
-  // }
+  }
+
+  onCancel($event: any) {
+    this.filteredItems = this.courses;
+  }
+
+  onSelect(course: Course) : void {
+    this.navCtrl.push(this.coursePage, {
+      quarter: this.quarter,
+      course: course.subject+'_'+course.abbv
+    })
   }
 
 }

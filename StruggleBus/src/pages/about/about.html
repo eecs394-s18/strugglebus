@@ -7,16 +7,20 @@
 </ion-header>
 
 <ion-content padding>
+  
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onSearch($event)"
+    (ionCancel)="onCancel($event)">
+  ></ion-searchbar>
+
   <ion-list>
 
     <ion-list-header> Classes </ion-list-header>
-    <ion-item class="text" *ngFor="let course of courses | async">
-      {{ course }}
+    <ion-item class="text" *ngFor="let course of filteredItems" (click)="onSelect(course)">
+      {{ course.subject + ' ' + course.abbv }}
     </ion-item>
 
   </ion-list>
-
-  <!--Limit to one click  -->
-  <button ion-button block (click)=addStudent()>{{this.buttonText}}</button>
-
 </ion-content>
