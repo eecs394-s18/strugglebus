@@ -7,6 +7,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SigninPage } from '../pages/signin/signin';
 import { CoursePage } from '../pages/course/course';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -20,6 +21,10 @@ import { DatabaseProvider } from '../providers/database/database';
 
 import { environment } from '../enviornments/environment';
 
+import { Facebook } from '@ionic-native/facebook';
+import { UserProvider } from '../providers/user/user';
+import { Firebase } from '@ionic-native/firebase';
+
 
 
 @NgModule({
@@ -29,6 +34,7 @@ import { environment } from '../enviornments/environment';
     ContactPage,
     HomePage,
     TabsPage,
+    SigninPage,
     CoursePage
   ],
   imports: [
@@ -45,6 +51,7 @@ import { environment } from '../enviornments/environment';
     ContactPage,
     HomePage,
     TabsPage,
+    SigninPage,
     CoursePage
   ],
   providers: [
@@ -52,7 +59,10 @@ import { environment } from '../enviornments/environment';
     SplashScreen,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DatabaseProvider
+    DatabaseProvider,
+    Facebook,
+    UserProvider,
+    Firebase
   ]
 })
 export class AppModule {}
