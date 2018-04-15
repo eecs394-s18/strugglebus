@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import { DatabaseProvider, Quarter, Course } from '../../providers/database/database'
+import { DatabaseProvider } from '../../providers/database/database'
 
 import {AboutPage} from '../about/about';
 

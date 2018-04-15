@@ -25,14 +25,12 @@
 
 	<ion-list-header> People Interested:  </ion-list-header>
 	<ion-item class="text" *ngFor="let person of people_interested | async">
-      {{ person }}
+      {{ person.name }}
     </ion-item>
     
     
 
-	 <!--Limit to one click  -->
-	 <!-- use angular filtering to check if students name is in list, if so then disable button -->
-  	<button ion-button block (click)=addStudent()>{{this.buttonText}}</button>
+  	<button ion-button [disabled]="button_disabled" block (click)=addUser()> I'M INTERESTED </button>
 
 
 </ion-content>

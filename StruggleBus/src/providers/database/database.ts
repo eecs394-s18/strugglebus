@@ -1,7 +1,5 @@
-// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
 
 export class Quarter {
     constructor(public name) {
@@ -51,11 +49,10 @@ export class DatabaseProvider {
   	}
 
 
-  	addInterested(quarter, course, name) {
-  		let path: string = '/quarters/' + quarter + '/' + course;
+  	addInterested(quarter, course, user) {
+  		let path: string = '/quarters/' + quarter + '/' + course + '/people_interested';
   		const courseRef = this.db.list(path);
-  		let new_people_interested = courseRef['people_interested'] + name;
-  		courseRef.update('people_interested', { people_interested: new_people_interested });
+  		courseRef.push({ name : user });
   	}
 
 

@@ -4,12 +4,6 @@ import { DatabaseProvider, Course } from '../../providers/database/database'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-/**
- * Generated class for the CoursePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -22,7 +16,8 @@ export class CoursePage implements OnInit {
 	course: string;
 	courseInfo: Observable<any>;
 	people_interested: Observable<any[]>;
-	// buttonText: string;
+	button_disabled: boolean;
+	user: string = "David Wallach";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public db: DatabaseProvider) {
 		this.quarter = navParams.get('quarter');
@@ -30,8 +25,13 @@ export class CoursePage implements OnInit {
   }
 
   ngOnInit () {
+
   	this.courseInfo = this.db.getCourseInfo(this.quarter, this.course)
   		.map(c => {
+
+
+  			// Firebase ignores empty list attributes, so if people_interested is empty we 
+  			// need to manually create it (case 1) else we retrieve it from the DB
   			var course: Course; 
   			if (c.length == 5) {
   				course = new Course(c[0], c[1], [], c[2], c[3], c[4]);
@@ -44,18 +44,18 @@ export class CoursePage implements OnInit {
   		});
 
   	this.people_interested = this.db.getPeopleInterested(this.quarter, this.course)
-			.map(people => {
+			.map(people => { return people; });
 
-				return people;
-			});
+	this.button_disabled = false;
+	this.people_interested.subscribe(people => {
+
+			for (var i=0; i < people.length; i++) {
+				if ( people[i].name == this.user) {  this.button_disabled = true; }
+			}
+	});
   }
 
-  addStudent(course: string): void {
-    this.db.addInterested(this.quarter, course, "name");
+  addUser(): void {
+    this.db.addInterested(this.quarter, this.course, this.user);
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CoursePage');
-  }
-
 }

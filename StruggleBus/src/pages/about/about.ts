@@ -1,7 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 import { DatabaseProvider } from '../../providers/database/database'
 import { CoursePage } from '../course/course';
 import { Course } from "../../providers/database/database";
