@@ -32,8 +32,8 @@
     "cordova-browser": "5.0.3",
     "cordova-ios": "4.5.4",
     "cordova-plugin-device": "^2.0.1",
-    "cordova-plugin-facebook4": "^1.9.1",
-    "cordova-plugin-firebase": "^0.1.25",
+    "cordova-plugin-facebook4": "^1.10.1",
+    "cordova-plugin-firebase": "^1.0.0",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.2.0",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -53,21 +53,21 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-firebase": {},
-      "cordova-plugin-facebook4": {
-        "APP_ID": "com.c394.Strugglebus",
-        "APP_NAME": "Strugglebus"
-      },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-facebook4": {
+        "APP_ID": "382986165514179",
+        "APP_NAME": "StruggleBus"
+      },
+      "cordova-plugin-firebase": {}
     },
     "platforms": [
       "browser",
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
