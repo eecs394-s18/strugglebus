@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { DatabaseProvider, Course } from '../../providers/database/database'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+  
+  
 
-
-@IonicPage()
 @Component({
   selector: 'page-course',
   templateUrl: 'course.html',

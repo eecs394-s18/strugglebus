@@ -66,7 +66,8 @@
         <variable name="APP_ID" value="382986165514179" />
         <variable name="APP_NAME" value="StruggleBus" />
     </plugin>
+    <allow-navigation href="http://192.168.86.54:8100" />
     <engine name="browser" spec="5.0.3" />
     <engine name="ios" spec="4.5.4" />
-    <engine name="android" spec="~7.0.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>
