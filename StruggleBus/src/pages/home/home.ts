@@ -18,7 +18,6 @@ export class HomePage {
 
 
   addClasses() {
-  	console.log("pushing add page");
   	this.navCtrl.push(this.addPage);
   }
   
