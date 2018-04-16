@@ -4,6 +4,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AddPage } from '../add/add';
 
 
+import { UserProvider } from '../../providers/user/user'
+
 
 @Component({
   selector: 'page-home',
@@ -11,9 +13,13 @@ import { AddPage } from '../add/add';
 })
 export class HomePage {
 
-	addPage = AddPage;
+  addPage = AddPage;
+  userData: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, userService: UserProvider) {
+
+  	this.userData = userService.userData;
+
   }
 
 

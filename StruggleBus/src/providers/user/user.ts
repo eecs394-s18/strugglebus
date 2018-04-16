@@ -21,6 +21,7 @@ export class UserProvider {
   // Check if user logged in, holds user data
   isLoggedIn:boolean = false;
   users:any;
+  userData: any;
 
   constructor(private fb: Facebook) {
     fb.getLoginStatus()
@@ -45,29 +46,56 @@ export class UserProvider {
     console.log("Login method called");
     // navCtrl.push(TabsPage, {}); // Push to tabs page
     this.fb.login(['public_profile', 'user_friends', 'email'])
-        .then(res => {
+        .then(response => {
           // Authenticate with firebase
           // Create credential object to pass to firebase
           const facebookCredential = firebase.auth.FacebookAuthProvider
-            .credential(res.authResponse.accessToken);
+            .credential(response.authResponse.accessToken);
           console.log("FB Credential: " + facebookCredential);
 
           firebase.auth().signInWithCredential(facebookCredential)
             .then( success => {
               console.log("Firebase success: " + JSON.stringify(success));
-              navCtrl.push(TabsPage, {});
+              this.fb.api('me?fields=id,name,email,first_name,picture.width(720).height(720).as(picture_large)', [])
+                     .then(profile => {
+          
+                            this.userData = { 
+                                 email: profile['email'], 
+                                 first_name: profile['first_name'], 
+                                 picture: profile['picture_large']['data']['url'], 
+                                 username: profile['name'],
+                               };
+
+                             navCtrl.push(TabsPage, {});
+                          });
             });
-          /*
-          if(res.status === "connected") {
-            this.isLoggedIn = true;
-            this.getUserDetail(res.authResponse.userID);
-            // Navigate to home page
-            navCtrl.push(TabsPage, {});
-          } else {
-            this.isLoggedIn = false;
-          }*/
+          
         })
         .catch(e => console.log('Error logging into Facebook', e));
+        
+        // .then(res => {
+        //   // Authenticate with firebase
+        //   // Create credential object to pass to firebase
+        //   const facebookCredential = firebase.auth.FacebookAuthProvider
+        //     .credential(res.authResponse.accessToken);
+        //   console.log("FB Credential: " + facebookCredential);
+
+        //   firebase.auth().signInWithCredential(facebookCredential)
+        //     .then( success => {
+        //       console.log("Firebase success: " + JSON.stringify(success));
+        //       navCtrl.push(TabsPage, {});
+        //     });
+        //   /*
+        //   if(res.status === "connected") {
+        //     this.isLoggedIn = true;
+        //     this.getUserDetail(res.authResponse.userID);
+        //     // Navigate to home page
+        //     navCtrl.push(TabsPage, {});
+        //   } else {
+        //     this.isLoggedIn = false;
+        //   }*/
+        // })
+        // .catch(e => console.log('Error logging into Facebook', e));
   }
 
   logout(navCtrl: NavController) {
