@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Find Classes
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-list-header> Quarter:  </ion-list-header>
+    <ion-item class="text" *ngFor="let quarter of quarters"  (click)="onSelect(quarter)">
+      {{ quarter }} 
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

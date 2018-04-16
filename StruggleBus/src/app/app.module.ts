@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPage } from '../pages/signin/signin';
 import { CoursePage } from '../pages/course/course';
+import { AddPage } from '../pages/add/add';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,7 +36,8 @@ import { Firebase } from '@ionic-native/firebase';
     HomePage,
     TabsPage,
     SigninPage,
-    CoursePage
+    CoursePage,
+    AddPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { Firebase } from '@ionic-native/firebase';
     HomePage,
     TabsPage,
     SigninPage,
-    CoursePage
+    CoursePage,
+    AddPage
   ],
   providers: [
     StatusBar,
