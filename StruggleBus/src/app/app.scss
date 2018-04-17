@@ -32,7 +32,11 @@ ion-header ion-icon.back-button-icon.icon {
     color: map-get($colors, white);
 }
 
-ion-header ion-icon.back-button-icon {
+ion-header ion-icon {
+    color: map-get($colors, white);
+}
+
+ion-header ion-icon.back-button-icon.text {
     color: map-get($colors, white);
 }
 

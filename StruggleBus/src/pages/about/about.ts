@@ -12,13 +12,9 @@ import { Course } from "../../providers/database/database";
 export class AboutPage implements OnInit {
 
   quarter: string;
-  // courses: Observable<any[]>;
   courses: Course[];
-  // filteredItems: Observable<any[]>;
   filteredItems: Course[];
-  // courseStrings: string[];  
   searchTerm: string;
-
   coursePage = CoursePage;
 
   constructor(public navCtrl: NavController, public db: DatabaseProvider,
@@ -52,9 +48,12 @@ export class AboutPage implements OnInit {
   }
 
   onSelect(course: Course) : void {
+
     this.navCtrl.push(this.coursePage, {
+
       quarter: this.quarter,
       course: course.subject+'_'+course.abbv
+
     })
   }
 

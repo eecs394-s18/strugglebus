@@ -30,7 +30,6 @@ export class CoursePage implements OnInit {
     this.user_id = userService.userData['id'];
     this.user_name = userService.userData['name'];
 
-    this.friends_interested = userService.getUserFriends();
   }
 
   ngOnInit () {
@@ -53,7 +52,7 @@ export class CoursePage implements OnInit {
   		});
 
   	this.people_interested = this.db.getPeopleInterested(this.quarter, this.course)
-			.map(people => { return people; });
+			                              .map(people => { return people; });
 
 	  this.button_disabled = false;
 	  this.people_interested.subscribe(people => {

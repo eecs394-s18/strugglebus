@@ -12,17 +12,11 @@
 
 <ion-content padding>
 
-  <ion-card>
-    <ion-card-header>{{ userData.username }}</ion-card-header>
-    <ion-card-content>
-      <p> Name: {{ (courseInfo | async)?.name }} </p>
-      <p> Abbv: {{ (courseInfo | async)?.abbv }} </p>
-      <p> School: {{ (courseInfo | async)?.school }} </p>
-      <p> Subject: {{ (courseInfo | async)?.subject }} </p>
-      <p> Term: {{ (courseInfo | async)?.term }} </p>
-    </ion-card-content>
-  </ion-card>
-	
+  <ion-item class="text"> Name: {{ (courseInfo | async)?.name }} </ion-item>
+  <ion-item class="text"> Abbv: {{ (courseInfo | async)?.abbv }} </ion-item>
+  <ion-item class="text"> School: {{ (courseInfo | async)?.school }} </ion-item>
+  <ion-item class="text"> Subject: {{ (courseInfo | async)?.subject }} </ion-item>
+  <ion-item class="text"> Term: {{ (courseInfo | async)?.term }} </ion-item>
 
   <div *ngIf="(friends_interested | async)?.length">
     <ion-list-header> Facebook Friends Interested:  </ion-list-header>
@@ -38,7 +32,6 @@
   </ion-item>
     
     
-
   	<button ion-button [disabled]="button_disabled" block color="NU" (click)=addUser()> I'M INTERESTED </button>
 
 

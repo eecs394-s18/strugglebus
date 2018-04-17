@@ -4,7 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { SettingsPage } from '../pages/settings/settings';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPage } from '../pages/signin/signin';
@@ -32,7 +32,7 @@ import { Firebase } from '@ionic-native/firebase';
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
+    SettingsPage,
     HomePage,
     TabsPage,
     SigninPage,
@@ -50,7 +50,7 @@ import { Firebase } from '@ionic-native/firebase';
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
+    SettingsPage,
     HomePage,
     TabsPage,
     SigninPage,

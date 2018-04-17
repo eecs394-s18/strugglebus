@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.c394.Strugglebus" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>StruggleBus</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <description>Mobile Application to help students at Northwestern Univeristy find their friends in their current classes and classes they are interested in.</description>
+    <author email="hi@ionicframework" href="https://github.com/eecs394-s18/strugglebus">EECS 394 Team Yellow (Spring 2018)</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

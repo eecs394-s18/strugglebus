@@ -5,20 +5,9 @@ import { TabsPage } from '../../pages/tabs/tabs';
 import firebase from 'firebase';
 
 
-// let firebase_test_config = {
-//   apiKey: "AIzaSyDtDugT9MDUCoXU6juMwBCRyERDKKwyU6o",
-//     authDomain: "strugglebus-fcaf8.firebaseapp.com",
-//     databaseURL: "https://strugglebus-fcaf8.firebaseio.com",
-//     projectId: "strugglebus-fcaf8",
-//     storageBucket: "strugglebus-fcaf8.appspot.com",
-//     messagingSenderId: "97540322838"
-// }
-//
-// firebase.initializeApp(firebase_test_config)
 
 @Injectable()
 export class UserProvider {
-  // Check if user logged in, holds user data
 
   verbose: boolean = false;
 
@@ -55,6 +44,7 @@ export class UserProvider {
 
     this.fb.login(['public_profile', 'user_friends', 'email'])
         .then(response => {
+         
           // Authenticate with firebase
           // Create credential object to pass to firebase
           const facebookCredential = firebase.auth.FacebookAuthProvider
@@ -86,8 +76,6 @@ export class UserProvider {
                           });
 
               this.getUserFriends();
-              // this.getUserFriendsInfo()
-
             });
           
         })
@@ -95,8 +83,7 @@ export class UserProvider {
   }
 
   logout(navCtrl: NavController) {
-    console.log("Logout method called");
-    // navCtrl.parent.parent.popToRoot(); // Pop to login page
+    if (this.verbose) console.log("Logout method called");
     this.fb.logout()
         .then( res => {
           this.isLoggedIn = false;
@@ -127,13 +114,13 @@ export class UserProvider {
                              name: profile['name']
                         };
 
-                        console.log("path ", path + '/picture?redirect=0');
+                        if (this.verbose) console.log("path ", path + '/picture?redirect=0');
                         this.fb.api(path + '/picture?redirect=0', [])
                              .then(data => {
 
-                                  console.log("data keys are: ", Object.keys(data));
+                                  if (this.verbose) console.log("data keys are: ", Object.keys(data));
                                   friendData['picture'] = data['data']['url'];
-                                  console.log("adding url to data ", friendData['picture']);
+                                  if (this.verbose) console.log("adding url to data ", friendData['picture']);
 
                               })
                               .catch(e => console.log("Error getting user's picture", e));
