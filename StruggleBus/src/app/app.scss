@@ -31,3 +31,11 @@
 ion-header ion-icon.back-button-icon.icon {
     color: map-get($colors, white);
 }
+
+ion-header ion-icon.back-button-icon {
+    color: map-get($colors, white);
+}
+
+ion-button {
+	background: map-get($colors, NU);
+}

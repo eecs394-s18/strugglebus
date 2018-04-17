@@ -49,11 +49,39 @@ export class DatabaseProvider {
   	}
 
 
-  	addInterested(quarter, course, user) {
-  		let path: string = '/quarters/' + quarter + '/' + course + '/people_interested';
+  	addInterested(quarter, course, id, name) {
+
+      // add User to Course list
+  		let path: string = '/quarters/' + quarter + '/' + course + '/people_interested/${id}';
   		const courseRef = this.db.list(path);
-  		courseRef.push({ name : user });
+  		courseRef.push({ name : name });
+
+      // add Course to User list
+
   	}
+
+
+    getUser(id, name) {
+      let path: string = `/users/${id}`
+      this.db.list(path).valueChanges()
+                      .subscribe(user => {
+                           // console.log("user is ", user);
+                           // console.log("user's type: ", typeof(user));
+                           // console.log("users keys: ", Object.keys(user));
+                           // console.log("number users keys: ", Object.keys(user).length);
+
+                           // add a new user 
+                           if (!Object.keys(user).length) {
+                             
+                             const userRef = this.db.object(path);
+                             userRef.set({name: `${name}`});
+
+                           }
+                          
+                      });
+      // now we created the user, or the user already exists
+      return this.db.list(path).valueChanges()
+    }
 
 
 

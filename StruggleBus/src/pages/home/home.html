@@ -29,7 +29,31 @@
     <ion-card-content>
       <p>Email: {{ userData.email }}</p>
       <p>First Name: {{ userData.first_name }}</p>
+      <p>id: {{ userData.id }}</p>
     </ion-card-content>
   </ion-card>
+
+
+  <!-- <ion-card *ngIf="userFriends">
+    <ion-card-header>{{ userFriends.username }}</ion-card-header>
+    <img [src]="userFriends.picture" />
+    <ion-card-content>
+      <p>First Name: {{ userFriends.first_name }}</p>
+      <p>id: {{ userFriends.id }}</p>
+    </ion-card-content>
+  </ion-card> -->
+
+<ion-list >
+
+    <ion-list-header> My Friends on StruggleBus  </ion-list-header>
+    <ion-item class="text" *ngFor="let friend of userFriends">
+        <img [src]="friend.picture" />
+        <p> {{ friend.name }} <p>
+        <p> {{ friend.id }} <p>
+          
+    </ion-item>
+
+  </ion-list>
+
 
 </ion-content>

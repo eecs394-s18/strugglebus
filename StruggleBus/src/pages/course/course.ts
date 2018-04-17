@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DatabaseProvider, Course } from '../../providers/database/database'
+import { UserProvider } from '../../providers/user/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
   
@@ -16,12 +17,20 @@ export class CoursePage implements OnInit {
 	course: string;
 	courseInfo: Observable<any>;
 	people_interested: Observable<any[]>;
-	button_disabled: boolean;
-	user: string = "David Wallach";
+  friends_interested: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db: DatabaseProvider) {
+	button_disabled: boolean;
+  user_id: string;
+  user_name: string;
+	
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public db: DatabaseProvider, userService: UserProvider) {
 		this.quarter = navParams.get('quarter');
 		this.course = navParams.get('course');
+    this.user_id = userService.userData['id'];
+    this.user_name = userService.userData['name'];
+
+    this.friends_interested = userService.getUserFriends();
   }
 
   ngOnInit () {
@@ -46,16 +55,19 @@ export class CoursePage implements OnInit {
   	this.people_interested = this.db.getPeopleInterested(this.quarter, this.course)
 			.map(people => { return people; });
 
-	this.button_disabled = false;
-	this.people_interested.subscribe(people => {
+	  this.button_disabled = false;
+	  this.people_interested.subscribe(people => {
 
-			for (var i=0; i < people.length; i++) {
-				if ( people[i].name == this.user) {  this.button_disabled = true; }
-			}
-	});
+			  for (var i=0; i < people.length; i++) {
+				  if ( people[i].name == this.user_id) {  this.button_disabled = true; }
+			  }
+	  
+    });
+
+
   }
 
   addUser(): void {
-    this.db.addInterested(this.quarter, this.course, this.user);
+    this.db.addInterested(this.quarter, this.course, this.user_id, this.user_name);
   }
 }
