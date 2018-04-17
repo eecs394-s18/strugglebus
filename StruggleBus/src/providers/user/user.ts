@@ -38,7 +38,7 @@ export class UserProvider {
   }
 
   // Log in and log out methods
-  login(navCtrl: NavController) {
+  login(navCtrl: NavController, loading) {
     
     if (this.verbose) console.log("Login method called");
 
@@ -71,7 +71,7 @@ export class UserProvider {
                              
                              this.userData['name'] = this.userData['first_name'] + " " + this.userData['last_name'];
                              this.userPath = '/users/' + profile['id'];
-
+                             loading.dismiss();
                              navCtrl.push(TabsPage, {});
                           });
 

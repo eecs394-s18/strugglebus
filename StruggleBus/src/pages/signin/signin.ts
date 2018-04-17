@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { TabsPage } from '../../pages/tabs/tabs';
 
@@ -9,11 +10,18 @@ import { TabsPage } from '../../pages/tabs/tabs';
 })
 export class SigninPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userProvider: UserProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+              public userProvider: UserProvider, public loadingCtrl: LoadingController) {
   }
 
   login() {
-    this.userProvider.login(this.navCtrl);
+    let loading = this.loadingCtrl.create({
+        content: 'Retrieving your Facebook data...'
+    });
+
+    loading.present();
+    this.userProvider.login(this.navCtrl, loading);
+
   }
 
   bypassLogin() {

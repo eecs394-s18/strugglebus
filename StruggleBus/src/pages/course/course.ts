@@ -29,6 +29,7 @@ export class CoursePage implements OnInit {
 		this.course = navParams.get('course');
     this.user_id = userService.userData['id'];
     this.user_name = userService.userData['name'];
+    // let loader = navParams.get('loader');
 
   }
 

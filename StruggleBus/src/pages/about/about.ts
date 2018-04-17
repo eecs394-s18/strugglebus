@@ -53,8 +53,8 @@ export class AboutPage implements OnInit {
 
       quarter: this.quarter,
       course: course.subject+'_'+course.abbv
-
     })
+
   }
 
 }
