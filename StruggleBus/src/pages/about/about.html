@@ -4,16 +4,16 @@
       <p class="nav-title">{{ quarter }}</p>
     </ion-title>
   </ion-navbar>
+  <ion-searchbar
+      [(ngModel)]="searchTerm"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onSearch($event)"
+      (ionCancel)="onCancel($event)">
+    ></ion-searchbar>
 </ion-header>
 
 <ion-content padding>
   
-  <ion-searchbar
-    [(ngModel)]="searchTerm"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onSearch($event)"
-    (ionCancel)="onCancel($event)">
-  ></ion-searchbar>
 
   <ion-list>
 

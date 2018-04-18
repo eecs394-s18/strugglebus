@@ -18,7 +18,7 @@
     <ion-item>
     <ion-label> Quarter: </ion-label>
     <ion-select [(ngModel)]="currentQuarter">
-      <ion-option *ngFor="let quarter of quarters; let idx = index" [value]="quarter.name"  selected="{{(idx==0).toString()}}"> 
+      <ion-option *ngFor="let quarter of quarters; let idx = index" [value]="quarter.name" selected="{{(idx==0).toString()}}"> 
           {{ quarter.name }}
       </ion-option>
     </ion-select>

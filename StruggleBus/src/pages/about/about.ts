@@ -21,6 +21,8 @@ export class AboutPage implements OnInit {
     public navParams: NavParams) {
      
       this.quarter = navParams.get('quarter');
+
+      console.log("got classes for quater ", this.quarter);
   }
 
   ngOnInit(){

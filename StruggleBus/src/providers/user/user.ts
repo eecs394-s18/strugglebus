@@ -100,12 +100,19 @@ export class UserProvider {
                return ids;
            })
            .then(ids => {
-                          
-             this.userFriendIDs = ids;
+
+              ids = ids[0];
+              this.userFriendIDs = ids;
+              
 
              for (var i=0; i < ids.length; i++) {
-                 
+               
+               if (this.verbose)  console.log("trying to get friends info for id: ", ids[i]);
+               
                var path = '/' + ids[i];
+               
+               if (this.verbose) console.log("with path ", path);
+               
                this.fb.api(path, [])
                       .then(profile => {
 

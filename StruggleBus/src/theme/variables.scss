@@ -50,7 +50,16 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
+// Nav bar 
 $toolbar-ios-button-color: color($colors, white);
+
+// Search bar
+$searchbar-ios-background-color: color($colors, NU);
+$searchbar-ios-border-color: color($colors, NU);
+$searchbar-ios-toolbar-input-background: color($colors, NU);
+$searchbar-ios-input-placeholder-color: color($colors, NU);
+
+
 
 
 // App Material Design Variables
@@ -58,10 +67,28 @@ $toolbar-ios-button-color: color($colors, white);
 // Material Design only Sass variables can go here
 
 
+// Nav bar 
+$toolbar-md-button-color: color($colors, white);
+
+// Search bar
+$searchbar-md-background-color: color($colors, NU);
+$searchbar-md-border-color: color($colors, NU);
+$searchbar-md-toolbar-input-background: color($colors, NU);
+$searchbar-md-input-placeholder-color: color($colors, NU);
 
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
+
+
+// Nav bar 
+$toolbar-wp-button-color: color($colors, white);
+
+// Search bar
+$searchbar-wp-background-color: color($colors, NU);
+$searchbar-wp-border-color: color($colors, NU);
+$searchbar-wp-toolbar-input-background: color($colors, NU);
+$searchbar-wp-input-placeholder-color: color($colors, NU);
 
 
 // App Theme

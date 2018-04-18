@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { AddPage } from '../add/add';
+import { AboutPage } from '../about/about';
 
 import { UserProvider } from '../../providers/user/user';
 import { DatabaseProvider, Quarter } from '../../providers/database/database';
@@ -18,7 +18,7 @@ import 'rxjs/add/operator/map';
 })
 export class HomePage implements OnInit {
 
-  addPage = AddPage;
+  aboutPage = AboutPage;
   userData: any;
   userCourses: Observable< any[] >;
   userFriends: any[];
@@ -49,7 +49,9 @@ export class HomePage implements OnInit {
 
 
   addClasses() {
-  	this.navCtrl.push(this.addPage);
+  	this.navCtrl.push(this.aboutPage,  {
+      quarter: this.currentQuarter
+    });
   }
 
   compareFn(q1: Quarter, q2: Quarter): boolean {
