@@ -8,10 +8,14 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController, public userProvider: UserProvider) {
-  }
+	userData: any;
+
+  	constructor(public navCtrl: NavController, public userService: UserProvider) {
+
+  		this.userData = userService.userData;
+  	}
 
   logout() {
-    this.userProvider.logout(this.navCtrl);
+    this.userService.logout(this.navCtrl);
   }
 }

@@ -2,8 +2,22 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 export class Quarter {
+    year: number;
+    season: number;
+
     constructor(public name) {
     	this.name = name;
+
+      var pieces = name.split('_');
+      this.year = parseInt(pieces[1]);
+
+      if (pieces[1] == "fall")        { this.season = 1; }
+      else if (pieces[1] == "winter") { this.season = 2; }
+      else if (pieces[1] == "spring") { this.season = 3; }
+      else                            { this.season = 4; } // summer season
+
+
+
     }
 }
 

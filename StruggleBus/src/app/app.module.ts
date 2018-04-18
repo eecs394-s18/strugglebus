@@ -11,6 +11,8 @@ import { SigninPage } from '../pages/signin/signin';
 import { CoursePage } from '../pages/course/course';
 import { AddPage } from '../pages/add/add';
 
+import { PipesModule} from '../pipes/pipes.module';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -44,7 +46,8 @@ import { Firebase } from '@ionic-native/firebase';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
