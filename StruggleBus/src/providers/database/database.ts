@@ -54,12 +54,12 @@ export class DatabaseProvider {
 
   	getCourseInfo(quarter, course) {
   		let path: string = '/quarters/' + quarter + '/' + course;
-  		return this.db.list(path).valueChanges();	
+  		return this.db.list(path).valueChanges();
   	}
 
   	getPeopleInterested(quarter, course) {
   		let path: string = '/quarters/' + quarter + '/' + course + '/people_interested';
-  		return this.db.list(path).valueChanges();	
+  		return this.db.list(path).valueChanges();
   	}
 
 
@@ -84,14 +84,14 @@ export class DatabaseProvider {
                            // console.log("users keys: ", Object.keys(user));
                            // console.log("number users keys: ", Object.keys(user).length);
 
-                           // add a new user 
+                           // add a new user
                            if (!Object.keys(user).length) {
-                             
+
                              const userRef = this.db.object(path);
                              userRef.set({name: `${name}`});
 
                            }
-                          
+
                       });
       // now we created the user, or the user already exists
       return this.db.list(path).valueChanges()
