@@ -62,12 +62,18 @@ export class DatabaseProvider {
   		return this.db.list(path).valueChanges();	
   	}
 
-    checkUserExists(fb_id: string) {
-      let path = '/users/'+ fb_id + '/'
-      return this.db.list(path).valueChanges()
+    getUserCourse(quarter, course, id) {
+      let path = `/users/${id}/courses_interested/${quarter}/${course}`
+      return this.db.object(path).valueChanges()
     }
+    
+    // // checks if user exists - DEPRECATED, don't use
+    // checkUserExists(fb_id: string) {
+    //   let path = '/users/'+ fb_id + '/'
+    //   return this.db.list(path).valueChanges()
+    // }
 
-    // adding user to firebase db
+    // adding user to firebase db - DEPRECATED, don't use
     addUser(fb_id: string, name: string) {
       let path = '/users/'
       let ref = this.db.list(path)
@@ -84,13 +90,50 @@ export class DatabaseProvider {
   	addInterested(quarter, course, id, name) {
 
       // add User to Course list
-  		let path: string = '/quarters/' + quarter + '/' + course + '/people_interested/${id}';
-  		const courseRef = this.db.list(path);
-  		courseRef.push({ name : name });
+  		let coursePath: string = `/quarters/${quarter}/${course}/people_interested/`;
+  		const courseRef = this.db.list(coursePath);
+      courseRef.update(id, { name : name })
+      .then((res) => {
+        console.log("Added user to course.")
+      })
+      .catch((err) => {
+        console.error(err)
+      });
 
       // add Course to User list
+      let userPath =  `/users/${id}/courses_interested/${quarter}/`
+      this.db.list(userPath).set(course, 0) // giving dummy data cause firebase doesnt support empty fields
+      .then((res) => {
+        console.log("Added user to course.")
+      })
+      .catch((err) => {
+        console.error(err)
+      });
+      
+    }
+    
+    removeInterested(quarter, course, id, name) {
+      // remove user from course list
+      let coursePath: string = `/quarters/${quarter}/${course}/people_interested/${id}`;
+      this.db.object(coursePath).remove()
+      .then((res) => {
+        console.log("Added user to course.")
+      })
+      .catch((err) => {
+        console.error(err)
+      });
+      // remove course from user list
+      let userPath =  `/users/${id}/courses_interested/${quarter}/${course}`
+      this.db.object(userPath).remove()
+      .then((res) => {
+        console.log("Added user to course.")
+      })
+      .catch((err) => {
+        console.error(err)
+      });
 
-  	}
+
+    }
 
     getUser(id, name) {
       let path: string = `/users/${id}`
@@ -100,20 +143,24 @@ export class DatabaseProvider {
               // console.log("user's type: ", typeof(user));
               // console.log("users keys: ", Object.keys(user));
               // console.log("number users keys: ", Object.keys(user).length);
-
+              
               // add a new user 
               if (!Object.keys(user).length) {
-                
                 const userRef = this.db.object(path);
                 userRef.set({name: `${name}`});
-
               }
-            
         });
       // now we created the user, or the user already exists
       return this.db.list(path).valueChanges()
     }
 
 
+    // for debugging purposes
+    debug() {
+      let path = `/users/2135029673180414/courses_interested/2018_spring/ACCOUNT_201-DL`
+      this.db.object(path).valueChanges().subscribe(res => {
+        console.log(res)
+      })
+    }
 
 }

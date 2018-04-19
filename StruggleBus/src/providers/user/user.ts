@@ -40,7 +40,7 @@ export class UserProvider {
   }
 
   // Log in and log out methods
-  login(navCtrl: NavController, loading, db: DatabaseProvider) {
+  login(navCtrl: NavController, loading) {
     
     if (this.verbose) console.log("Login method called");
 
@@ -71,17 +71,9 @@ export class UserProvider {
                         picture: profile['picture_large']['data']['url'], 
                         username: profile['name']
                       };
-                  // this.userData = profile
   
                   this.userData['name'] = this.userData['first_name'] + " " + this.userData['last_name'];
                   this.userPath = '/users/' + profile['id'];
-
-                  // check if user exists in firebase database
-                  db.checkUserExists(this.userData.id).subscribe(res => {
-                    if (res.length === 0) { // user doesn't exist
-                      db.addUser(this.userData.id, this.userData.name) // add the user
-                    }
-                  });
 
                   loading.dismiss();
                   navCtrl.push(TabsPage, {});

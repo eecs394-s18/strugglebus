@@ -21,16 +21,14 @@ export class SigninPage {
     });
 
     loading.present();
-    this.userProvider.login(this.navCtrl, loading, this.db);
+    this.userProvider.login(this.navCtrl, loading);
 
   }
 
   bypassLogin() {
     this.navCtrl.push(TabsPage,{}); //Go directly to homepage without logging in
-    
-    // //For testing
-    // this.db.checkUserExists("101").subscribe(res => {
-    //   console.log(res);
-    // })
+
+    // for debugging
+    this.db.debug()
   }
 }
