@@ -31,9 +31,9 @@ export class HomePage implements OnInit {
     
     this.userData = userService.userData;
     
-    if (this.userData) {
-      this.userCourses = db.getUser(this.userData['id'], this.userData['name']);
-    }
+    // if (this.userData) {
+    //   this.userCourses = db.getUser(this.userData['id'], this.userData['name']);
+    // }
     
     this.userFriends = userService.userFriends;
     console.log("this.usersFriends length is ", this.userFriends.length);

@@ -62,6 +62,24 @@ export class DatabaseProvider {
   		return this.db.list(path).valueChanges();	
   	}
 
+    checkUserExists(fb_id: string) {
+      let path = '/users/'+ fb_id + '/'
+      return this.db.list(path).valueChanges()
+    }
+
+    // adding user to firebase db
+    addUser(fb_id: string, name: string) {
+      let path = '/users/'
+      let ref = this.db.list(path)
+      
+      ref.update(fb_id, { name : name })
+      .then((res) => {
+        console.log("Added user. Res was: "+res)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+    }
 
   	addInterested(quarter, course, id, name) {
 
@@ -74,25 +92,24 @@ export class DatabaseProvider {
 
   	}
 
-
     getUser(id, name) {
       let path: string = `/users/${id}`
       this.db.list(path).valueChanges()
-                      .subscribe(user => {
-                           // console.log("user is ", user);
-                           // console.log("user's type: ", typeof(user));
-                           // console.log("users keys: ", Object.keys(user));
-                           // console.log("number users keys: ", Object.keys(user).length);
+        .subscribe(user => {
+              // console.log("user is ", user);
+              // console.log("user's type: ", typeof(user));
+              // console.log("users keys: ", Object.keys(user));
+              // console.log("number users keys: ", Object.keys(user).length);
 
-                           // add a new user 
-                           if (!Object.keys(user).length) {
-                             
-                             const userRef = this.db.object(path);
-                             userRef.set({name: `${name}`});
+              // add a new user 
+              if (!Object.keys(user).length) {
+                
+                const userRef = this.db.object(path);
+                userRef.set({name: `${name}`});
 
-                           }
-                          
-                      });
+              }
+            
+        });
       // now we created the user, or the user already exists
       return this.db.list(path).valueChanges()
     }
