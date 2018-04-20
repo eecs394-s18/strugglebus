@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { TabsPage } from '../../pages/tabs/tabs';
+import { DatabaseProvider } from "../../providers/database/database";
 
 @Component({
   selector: 'page-signin',
@@ -11,7 +12,7 @@ import { TabsPage } from '../../pages/tabs/tabs';
 export class SigninPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-              public userProvider: UserProvider, public loadingCtrl: LoadingController) {
+              public userProvider: UserProvider, public loadingCtrl: LoadingController, public db: DatabaseProvider) {
   }
 
   login() {
@@ -26,5 +27,8 @@ export class SigninPage {
 
   bypassLogin() {
     this.navCtrl.push(TabsPage,{}); //Go directly to homepage without logging in
+
+    // for debugging
+    this.db.debug()
   }
 }

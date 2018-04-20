@@ -19,7 +19,7 @@ export class CoursePage implements OnInit {
 	people_interested: Observable<any[]>;
   friends_interested: any;
 
-	button_disabled: boolean;
+	hasCourse: boolean;
   user_id: string;
   user_name: string;
 	
@@ -29,8 +29,8 @@ export class CoursePage implements OnInit {
 		this.course = navParams.get('course');
     this.user_id = userService.userData['id'];
     this.user_name = userService.userData['name'];
-    // let loader = navParams.get('loader');
-
+		// let loader = navParams.get('loader');
+		
   }
 
   ngOnInit () {
@@ -52,22 +52,37 @@ export class CoursePage implements OnInit {
   			return course;
   		});
 
-  	this.people_interested = this.db.getPeopleInterested(this.quarter, this.course)
-			                              .map(people => { return people; });
+			this.people_interested = this.db.getPeopleInterested(this.quarter, this.course)
+			.map(people => {
+				return people;
+			});
 
-	  this.button_disabled = false;
-	  this.people_interested.subscribe(people => {
-
-			  for (var i=0; i < people.length; i++) {
-				  if ( people[i].name == this.user_id) {  this.button_disabled = true; }
-			  }
-	  
+			// checking if user already has course and accordingly disabling button
+			this.db.getUserCourse(this.quarter, this.course, this.user_id)
+			.subscribe((res) => {
+				if (res === null) {
+					this.hasCourse = false
+				} else{
+					this.hasCourse = true
+				}
+			})
+															
+			this.people_interested.subscribe(people => {
+				for (var i=0; i < people.length; i++) {
+					if ( people[i].name == this.user_id) {  this.hasCourse = true; }
+				}
     });
 
 
   }
 
   addUser(): void {
-    this.db.addInterested(this.quarter, this.course, this.user_id, this.user_name);
-  }
+		this.db.addInterested(this.quarter, this.course, this.user_id, this.user_name);
+		this.hasCourse = true;
+	}
+	
+	removeUser(): void {
+		this.db.removeInterested(this.quarter, this.course, this.user_id, this.user_name)
+		this.hasCourse = false;
+	}
 }

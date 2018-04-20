@@ -2,11 +2,13 @@ import { Component, OnInit} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { DatabaseProvider } from '../../providers/database/database';
 import { CoursePage } from '../course/course';
-import { Course } from '../../providers/database/database';
+import { Course } from "../../providers/database/database";
+import { QuarterPipe } from '../../pipes/quarter/quarter';
 
 @Component({
   selector: 'page-about',
-  templateUrl: 'about.html'
+  templateUrl: 'about.html',
+  providers: [QuarterPipe]
 })
 
 export class AboutPage implements OnInit {

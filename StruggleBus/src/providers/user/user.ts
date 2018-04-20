@@ -4,6 +4,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { TabsPage } from '../../pages/tabs/tabs';
 import firebase from 'firebase';
 
+import { DatabaseProvider } from "../database/database"
 
 
 @Injectable()
@@ -20,6 +21,7 @@ export class UserProvider {
   userFriends: any[] = [];
 
   constructor(private fb: Facebook) {
+    // checks whether the user is logged in or not, and initialises this.isLoggedIn accordingly
     fb.getLoginStatus()
       .then(res => {
         console.log(res.status);
@@ -50,7 +52,9 @@ export class UserProvider {
           const facebookCredential = firebase.auth.FacebookAuthProvider
             .credential(response.authResponse.accessToken);
           
-          if (this.verbose) console.log("FB Credential: " + facebookCredential);
+          if (this.verbose) {
+            console.log("FB Credential: " + facebookCredential);
+          }
 
           firebase.auth().signInWithCredential(facebookCredential)
             .then( success => {
@@ -58,22 +62,22 @@ export class UserProvider {
               if (this.verbose) console.log("Firebase success: " + JSON.stringify(success));
               
               this.fb.api('me?fields=id,name,email,first_name,last_name,picture.width(720).height(720).as(picture_large)', [])
-                     .then(profile => {
-          
-                            this.userData = { 
-                                 id: profile['id'],
-                                 email: profile['email'], 
-                                 first_name: profile['first_name'], 
-                                 last_name: profile['last_name'], 
-                                 picture: profile['picture_large']['data']['url'], 
-                                 username: profile['name']
-                               };
-                             
-                             this.userData['name'] = this.userData['first_name'] + " " + this.userData['last_name'];
-                             this.userPath = '/users/' + profile['id'];
-                             loading.dismiss();
-                             navCtrl.push(TabsPage, {});
-                          });
+                .then(profile => {
+                  this.userData = { 
+                        id: profile['id'],
+                        email: profile['email'], 
+                        first_name: profile['first_name'], 
+                        last_name: profile['last_name'], 
+                        picture: profile['picture_large']['data']['url'], 
+                        username: profile['name']
+                      };
+  
+                  this.userData['name'] = this.userData['first_name'] + " " + this.userData['last_name'];
+                  this.userPath = '/users/' + profile['id'];
+
+                  loading.dismiss();
+                  navCtrl.push(TabsPage, {});
+                });
 
               this.getUserFriends();
             });

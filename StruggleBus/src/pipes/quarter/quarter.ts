@@ -9,6 +9,7 @@ export class QuarterPipe implements PipeTransform {
 
   transform(value: string, ...args) {
   	var res = value.split('_');	
-    return res[1] + ' ' + res[0];
+  	let season = res[1].charAt(0).toUpperCase() + res[1].slice(1);
+    return season + ' ' + res[0];
   }
 }
