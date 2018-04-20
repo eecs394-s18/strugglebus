@@ -73,4 +73,5 @@
     <engine name="browser" spec="5.0.3" />
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.0.0" />
+    <allow-navigation href="http://98.206.142.229:8100" />
 </widget>

@@ -18,7 +18,7 @@
     <ion-item>
     <ion-label> Quarter: </ion-label>
     <ion-select [(ngModel)]="currentQuarter">
-      <ion-option *ngFor="let quarter of quarters; let idx = index" [value]="quarter.name" selected="{{(idx==0).toString()}}"> 
+      <ion-option *ngFor="let quarter of quarters; let idx = index" [value]="quarter.name" selected="{{(idx==0).toString()}}">
           {{ quarter.name }}
       </ion-option>
     </ion-select>
@@ -34,10 +34,11 @@
 
     <ion-list-header> My Friends on StruggleBus  </ion-list-header>
     <ion-item class="text" *ngFor="let friend of userFriends">
-        <img [src]="friend.picture" />
-        <p> {{ friend.name }} <p>
-        <p> {{ friend.id }} <p>
-          
+      <ion-label>{{ friend.name }}</ion-label>
+      <ion-note item-end>{{ friend.id }}</ion-note>
+      <ion-avatar item-start>
+        <img [src]="friend.picture">
+      </ion-avatar>
     </ion-item>
 
   </ion-list>
