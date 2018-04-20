@@ -5,21 +5,21 @@
     </ion-title>
   </ion-navbar>
   <ion-searchbar
-      [(ngModel)]="searchTerm"
-      [showCancelButton]="shouldShowCancel"
-      (ionInput)="onSearch($event)"
-      (ionCancel)="onCancel($event)">
-    ></ion-searchbar>
+    [(ngModel)]="searchTerm"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onSearch($event)"
+    (ionCancel)="onCancel($event)">
+  ></ion-searchbar>
 </ion-header>
 
 <ion-content padding>
-  
+
 
   <ion-list>
 
     <ion-list-header> Classes </ion-list-header>
-    <ion-item class="text" *ngFor="let course of filteredItems" (click)="onSelect(course)">
-      {{ course.subject + ' ' + course.abbv }}
+    <ion-item *ngFor="let course of filteredItems" (click)="onSelect(course)">
+      <course-card [course]="course"></course-card>
     </ion-item>
 
   </ion-list>
