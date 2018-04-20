@@ -55,13 +55,11 @@ export class AboutPage implements OnInit {
   }
 
   onSelect(course: Course): void {
-
+    console.log("course clicked!") // debug
     this.navCtrl.push(this.coursePage, {
-
       quarter: this.quarter,
       course: course.subject + '_' + course.abbv
     })
-
   }
 
 }

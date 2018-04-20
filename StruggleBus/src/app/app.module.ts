@@ -28,6 +28,7 @@ import { UserProvider } from '../providers/user/user';
 import { Firebase } from '@ionic-native/firebase';
 
 import { CourseCard } from '../components/course-card/course-card'
+import { MessengerProvider } from '../providers/messenger/messenger';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { CourseCard } from '../components/course-card/course-card'
     DatabaseProvider,
     Facebook,
     UserProvider,
-    Firebase
+    Firebase,
+    MessengerProvider
   ]
 })
 export class AppModule {}
