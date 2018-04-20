@@ -66,7 +66,7 @@ export class DatabaseProvider {
       let path = `/users/${id}/courses_interested/${quarter}/${course}`
       return this.db.object(path).valueChanges()
     }
-    
+
     // // checks if user exists - DEPRECATED, don't use
     // checkUserExists(fb_id: string) {
     //   let path = '/users/'+ fb_id + '/'
@@ -77,7 +77,7 @@ export class DatabaseProvider {
     addUser(fb_id: string, name: string) {
       let path = '/users/'
       let ref = this.db.list(path)
-      
+
       ref.update(fb_id, { name : name })
       .then((res) => {
         console.log("Added user. Res was: "+res)
@@ -109,9 +109,9 @@ export class DatabaseProvider {
       .catch((err) => {
         console.error(err)
       });
-      
+
     }
-    
+
     removeInterested(quarter, course, id) {
       // remove user from course list
       let coursePath: string = `/quarters/${quarter}/${course}/people_interested/${id}`;
@@ -143,15 +143,15 @@ export class DatabaseProvider {
               // console.log("user's type: ", typeof(user));
               // console.log("users keys: ", Object.keys(user));
               // console.log("number users keys: ", Object.keys(user).length);
-              
-              // add a new user 
+
+              // add a new user
               if (!Object.keys(user).length) {
                 const userRef = this.db.object(path);
                 userRef.set({name: `${name}`});
               }
         });
       // now we created the user, or the user already exists
-      return this.db.list(path).valueChanges()
+      return this.db.object(path).valueChanges()
     }
 
 

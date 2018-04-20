@@ -3,7 +3,7 @@
     <name>StruggleBus</name>
     <description>Mobile Application to help students at Northwestern Univeristy find their friends in their current classes and classes they are interested in.</description>
     <author email="hi@ionicframework" href="https://github.com/eecs394-s18/strugglebus">EECS 394 Team Yellow (Spring 2018)</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.105.153.229:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -70,8 +70,9 @@
         <variable name="APP_NAME" value="StruggleBus" />
     </plugin>
     <allow-navigation href="http://169.254.244.148:8100" />
+    <allow-navigation href="http://98.206.142.229:8100" />
+    <allow-navigation href="http://10.105.153.229:8100" />
     <engine name="browser" spec="5.0.3" />
     <engine name="android" spec="7.0.0" />
-    <allow-navigation href="http://98.206.142.229:8100" />
     <engine name="ios" spec="4.5.4" />
 </widget>

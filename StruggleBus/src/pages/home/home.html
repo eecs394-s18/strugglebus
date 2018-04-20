@@ -18,15 +18,19 @@
     <ion-item>
     <ion-label> Quarter: </ion-label>
     <ion-select [(ngModel)]="currentQuarter">
-      <ion-option *ngFor="let quarter of quarters; let idx = index" [value]="quarter.name" selected="{{(idx==0).toString()}}"> 
+      <ion-option *ngFor="let quarter of quarters; let idx = index" [value]="quarter.name" selected="{{(idx==0).toString()}}">
           {{ quarter.name | quarterPipe }}
       </ion-option>
     </ion-select>
   </ion-item>
 
-  <ion-list>
+  <ion-list *ngIf="currentQuarter && userCourses">
 
-    <ion-list-header> My classes  </ion-list-header>
+    <ion-list-header> My Classes  </ion-list-header>
+    <ion-item *ngFor="let course of userCourses[currentQuarter]" text-wrap>
+      {{course}}
+      <!-- <course-card [course]="course"></course-card> -->
+    </ion-item>
 
   </ion-list>
 
