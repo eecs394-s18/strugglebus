@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
-
+import { QuarterPipe } from '../../pipes/quarter/quarter';
 import { UserProvider } from '../../providers/user/user';
 import { DatabaseProvider, Quarter } from '../../providers/database/database';
 import { PipesModule} from '../../pipes/pipes.module'
@@ -15,6 +15,7 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
+  providers: [QuarterPipe]
 })
 export class HomePage implements OnInit {
 
