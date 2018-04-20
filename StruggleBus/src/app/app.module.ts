@@ -27,7 +27,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { UserProvider } from '../providers/user/user';
 import { Firebase } from '@ionic-native/firebase';
 
-
+import { CourseCard } from '../components/course-card/course-card'
 
 @NgModule({
   declarations: [
@@ -37,7 +37,8 @@ import { Firebase } from '@ionic-native/firebase';
     HomePage,
     TabsPage,
     SigninPage,
-    CoursePage
+    CoursePage,
+    CourseCard
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,8 @@ import { Firebase } from '@ionic-native/firebase';
     HomePage,
     TabsPage,
     SigninPage,
-    CoursePage
+    CoursePage,
+    CourseCard
   ],
   providers: [
     StatusBar,
