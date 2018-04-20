@@ -112,7 +112,7 @@ export class DatabaseProvider {
       
     }
     
-    removeInterested(quarter, course, id, name) {
+    removeInterested(quarter, course, id) {
       // remove user from course list
       let coursePath: string = `/quarters/${quarter}/${course}/people_interested/${id}`;
       this.db.object(coursePath).remove()

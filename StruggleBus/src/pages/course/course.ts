@@ -82,7 +82,7 @@ export class CoursePage implements OnInit {
 	}
 	
 	removeUser(): void {
-		this.db.removeInterested(this.quarter, this.course, this.user_id, this.user_name)
+		this.db.removeInterested(this.quarter, this.course, this.user_id)
 		this.hasCourse = false;
 	}
 }
