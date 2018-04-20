@@ -32,6 +32,13 @@ export class Course {
     }
 }
 
+export class User {
+  constructor(public id: string, public name: string) {
+    this.id = id;
+    this.name = name;
+  }
+}
+
 
 @Injectable()
 export class DatabaseProvider {
@@ -58,8 +65,8 @@ export class DatabaseProvider {
   	}
 
   	getPeopleInterested(quarter, course) {
-  		let path: string = '/quarters/' + quarter + '/' + course + '/people_interested';
-  		return this.db.list(path).valueChanges();
+  		let path: string = '/quarters/' + quarter + '/' + course + '/people_interested/';
+  		return this.db.list(path).snapshotChanges();
   	}
 
     getUserCourse(quarter, course, id) {
