@@ -28,7 +28,7 @@ export class Course {
     	this.school = school;
     	this.subject = subject;
     	this.term = term;
-    	// this.people_interested = people_interested;
+    	this.people_interested = people_interested;
     }
 }
 

@@ -9,7 +9,8 @@ import { PipesModule} from '../../pipes/pipes.module'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-
+import { Course } from "../../providers/database/database";
+import { CoursePage } from '../course/course';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class HomePage implements OnInit {
 
   aboutPage = AboutPage;
   userData: any;
-  userCourses: any;
+  userCourses: Course[];
   userFriends: any[];
   quarters: Quarter[];
   currentQuarter: string;
@@ -56,7 +57,7 @@ export class HomePage implements OnInit {
         //   }
         // }, 
 
-        this.userCourses = {}; //Gets first element which should be courses_interested, need to check it exists
+        this.userCourses = []; //Gets first element which should be courses_interested, need to check it exists
         let quarters = ci['courses_interested']
         for (let quarter in quarters) {
           this.userCourses[quarter] = Object.keys(quarters[quarter]);
@@ -99,6 +100,14 @@ export class HomePage implements OnInit {
     else {
       return (q1.year > q2.year);
     }
+  }
+
+  onSelect(course: /*Course*/ string): void {
+    this.navCtrl.push(CoursePage, {
+      quarter: this.currentQuarter,
+      course: course
+      // course: course.subject + '_' + course.abbv
+    })
   }
 
 

@@ -27,7 +27,7 @@
   <ion-list *ngIf="currentQuarter && userCourses">
 
     <ion-list-header> My Classes  </ion-list-header>
-    <ion-item *ngFor="let course of userCourses[currentQuarter]" text-wrap>
+    <ion-item *ngFor="let course of userCourses[currentQuarter]" text-wrap (click)="onSelect(course)">
       {{course}}
       <!-- <course-card [course]="course"></course-card> -->
     </ion-item>
