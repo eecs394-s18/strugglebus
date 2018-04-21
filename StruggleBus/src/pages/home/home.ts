@@ -22,11 +22,12 @@ export class HomePage implements OnInit {
 
   aboutPage = AboutPage;
   userData: any;
-  userCourses: Course[];
+  // userCourses: Course[]
+  userCourses: any[]
   userFriends: any[];
   quarters: Quarter[];
   currentQuarter: string;
-  debug: boolean = true
+  debug: boolean = false
 
   constructor(public navCtrl: NavController, public navParams: NavParams, userService: UserProvider, public db: DatabaseProvider) {
 
@@ -48,7 +49,7 @@ export class HomePage implements OnInit {
     if (this.userData) {
       this.db.getUser(this.userData['id'], this.userData['name'])
       .subscribe(ci => {
-        if (this.debug) console.log("Output of getUser is: ", JSON.stringify(ci));
+        // if (this.debug) console.log("Output of getUser is: ", JSON.stringify(ci));
         // fyi:
         // ci  = {
         //   'courses_interested':{
@@ -57,28 +58,21 @@ export class HomePage implements OnInit {
         //   }
         // }, 
 
-        this.userCourses = []; //Gets first element which should be courses_interested, need to check it exists
+        this.userCourses = []; // important, list doesn't render without this line
         let quarters = ci['courses_interested']
         for (let quarter in quarters) {
-          this.userCourses[quarter] = Object.keys(quarters[quarter]);
-
-        //   // this.userCourses[quarter] = Object.keys(ci[0][quarter])
-        //   // .map(course => {
-        //   //   return this.db.getCourseInfo(quarter, course)
-        //   //   .map(c => {
-        //   //
-        //   //     // Firebase ignores empty list attributes, so if people_interested is empty we
-        //   //     // need to manually create it (case 1) else we retrieve it from the DB
-        //   //     var course: Course;
-        //   //     if (c.length == 5) {
-        //   //       course = new Course(c[0], c[1], [], c[2], c[3], c[4]);
-        //   //     }
-        //   //     else {
-        //   //       course = new Course(c[0], c[1], c[2], c[3], c[4], c[5]);
-        //   //     }
-        //   //     return course;
-        //   //   });
-        //   // });
+          this.userCourses[quarter] = Object.keys(quarters[quarter])
+          // .map(courseName => {
+          //   if (this.debug) console.log("courseName taken is", courseName)
+          //   return this.db.getCourseInfo(quarter, courseName)
+          //   // .subscribe(courseInfo => {
+          //   //   if (this.debug) console.log("courseInfo gotten is", JSON.stringify(courseInfo))
+          //   // })
+          //   .map(c => {
+          //     if (this.debug) console.log("courseInfo gotten is", JSON.stringify(c))
+          //     return new Course(c[0], c[1], [2], c[3], c[4], c[5])
+          //   })
+          // })
         }
 
         if (this.debug) console.log("this.userCourses is: ", JSON.stringify(this.userCourses));

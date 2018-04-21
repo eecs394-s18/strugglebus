@@ -25,18 +25,15 @@
     </ion-item>
   </div>
 
+  <button ion-button *ngIf="!hasCourse" block color="NU" (click)=addUser()> I'M INTERESTED </button>
+
+  <br/>
+  <div text-center *ngIf="hasCourse">You're currently interested in this course.</div>
+  <button ion-button *ngIf="hasCourse" block color="NU" (click)=removeUser()> NOT INTERESTED </button>
 
 	<ion-list-header> People Interested:  </ion-list-header>
 	<ion-item class="text" *ngFor="let person of people_interested | async">
       {{ person.name }}
   </ion-item>
-    
-    
-    <button ion-button *ngIf="!hasCourse" block color="NU" (click)=addUser()> I'M INTERESTED </button>
-
-    <br/>
-    <div text-center *ngIf="hasCourse">You're currently interested in this course.</div>
-    <button ion-button *ngIf="hasCourse" block color="NU" (click)=removeUser()> NOT INTERESTED </button>
-
 
 </ion-content>
