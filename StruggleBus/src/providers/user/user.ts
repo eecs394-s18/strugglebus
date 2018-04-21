@@ -45,45 +45,51 @@ export class UserProvider {
     if (this.verbose) console.log("Login method called");
 
     this.fb.login(['public_profile', 'user_friends', 'email'])
-        .then(response => {
-         
-          // Authenticate with firebase
-          // Create credential object to pass to firebase
-          const facebookCredential = firebase.auth.FacebookAuthProvider
-            .credential(response.authResponse.accessToken);
-          
-          if (this.verbose) {
-            console.log("FB Credential: " + facebookCredential);
-          }
+    .then(response => {
+      
+      // Authenticate with firebase
+      // Create credential object to pass to firebase
+      const facebookCredential = firebase.auth.FacebookAuthProvider
+      .credential(response.authResponse.accessToken);
+      
+      if (this.verbose) {
+        console.log("FB Credential: " + facebookCredential);
+      }
 
-          firebase.auth().signInWithCredential(facebookCredential)
-            .then( success => {
-              
-              if (this.verbose) console.log("Firebase success: " + JSON.stringify(success));
-              
-              this.fb.api('me?fields=id,name,email,first_name,last_name,picture.width(720).height(720).as(picture_large)', [])
-                .then(profile => {
-                  this.userData = { 
-                        id: profile['id'],
-                        email: profile['email'], 
-                        first_name: profile['first_name'], 
-                        last_name: profile['last_name'], 
-                        picture: profile['picture_large']['data']['url'], 
-                        username: profile['name']
-                      };
-  
-                  this.userData['name'] = this.userData['first_name'] + " " + this.userData['last_name'];
-                  this.userPath = '/users/' + profile['id'];
+      firebase.auth().signInWithCredential(facebookCredential)
+      .then( success => {
+        
+        if (this.verbose) console.log("Firebase success: " + JSON.stringify(success));
+        
+        this.fb.api('me?fields=id,name,email,first_name,last_name,picture.width(720).height(720).as(picture_large)', [])
+        .then(profile => {
+          this.userData = { 
+            id: profile['id'],
+            email: profile['email'], 
+            first_name: profile['first_name'], 
+            last_name: profile['last_name'], 
+            picture: profile['picture_large']['data']['url'], 
+            username: profile['name']
+          };
 
-                  loading.dismiss();
-                  navCtrl.push(TabsPage, {});
-                });
-
-              this.getUserFriends();
-            });
-          
+          this.userData['name'] = this.userData['first_name'] + " " + this.userData['last_name'];
+          this.userPath = '/users/' + profile['id'];
+          this.getUserFriends()
+          .then(() => {
+            loading.dismiss();
+            navCtrl.push(TabsPage, {});
+          })
         })
-        .catch(e => console.log('Error logging into Facebook', e));
+        // .then(() => {
+        //   loading.dismiss();
+        //   navCtrl.push(TabsPage, {});
+        // });
+      });      
+    })
+    .catch(e => {
+      console.log('Error logging into Facebook', e);
+      loading.dismiss(); // get rid of the loader if you cancelled login
+    });
   }
 
   logout(navCtrl: NavController) {
@@ -98,53 +104,50 @@ export class UserProvider {
   }
 
   getUserFriends() {
-    this.fb.api('/me/friends?fields=uid', [])
-           .then(response => {
-               var ids = [response['data'].map(id => id['id'])];
-               return ids;
-           })
-           .then(ids => {
+    return this.fb.api('/me/friends?fields=uid', [])
+    .then(response => {
+      var ids = [response['data'].map(id => id['id'])];
+      return ids;
+    })
+    .then(ids => {
+      this.userFriends = [] // resetting to prevent duplication
+      ids = ids[0];
+      this.userFriendIDs = ids;
+      for (var i=0; i < ids.length; i++) {
+        if (this.verbose)  console.log("trying to get friends info for id: ", ids[i]);
+        
+        var path = '/' + ids[i];
+        
+        if (this.verbose) console.log("with path ", path);
+        
+        this.fb.api(path, [])
+        .then(profile => {
 
-              ids = ids[0];
-              this.userFriendIDs = ids;
-              
+          var friendData = { 
+            id: ids[i],
+            name: profile['name']
+          };
 
-             for (var i=0; i < ids.length; i++) {
-               
-               if (this.verbose)  console.log("trying to get friends info for id: ", ids[i]);
-               
-               var path = '/' + ids[i];
-               
-               if (this.verbose) console.log("with path ", path);
-               
-               this.fb.api(path, [])
-                      .then(profile => {
+          if (this.verbose) console.log("path ", path + '/picture?redirect=0');
+          this.fb.api(path + '/picture?redirect=0', [])
+          .then(data => {
 
-                        var friendData = { 
-                             id: ids[i],
-                             name: profile['name']
-                        };
+            if (this.verbose) console.log("data keys are: ", Object.keys(data));
+            friendData['picture'] = data['data']['url'];
+            if (this.verbose) console.log("adding url to data ", friendData['picture']);
 
-                        if (this.verbose) console.log("path ", path + '/picture?redirect=0');
-                        this.fb.api(path + '/picture?redirect=0', [])
-                             .then(data => {
+          })
+          .catch(e => console.log("Error getting user's picture", e));
 
-                                  if (this.verbose) console.log("data keys are: ", Object.keys(data));
-                                  friendData['picture'] = data['data']['url'];
-                                  if (this.verbose) console.log("adding url to data ", friendData['picture']);
+          this.userFriends.push(friendData)
 
-                              })
-                              .catch(e => console.log("Error getting user's picture", e));
-
-                        this.userFriends.push(friendData);
-
-                    })
-                    .catch(e => console.log("Error getting user's friend's information", e));
-             }
-
-           })
-           .catch(e => console.log("Error geting user's friends", e));;
-     
+        })
+        .catch(e => console.log("Error getting user's friend's information", e));
+      
+      }
+    })
+    .catch(e => console.log("Error geting user's friends", e));
+    
   }
 
 
