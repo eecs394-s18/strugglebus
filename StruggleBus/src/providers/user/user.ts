@@ -87,7 +87,7 @@ export class UserProvider {
       });      
     })
     .catch(e => {
-      console.log('Error logging into Facebook', e);
+      console.error('Error logging into Facebook', e);
       loading.dismiss(); // get rid of the loader if you cancelled login
     });
   }
@@ -100,7 +100,7 @@ export class UserProvider {
           // Navigate back to login page (root)
           navCtrl.parent.parent.popToRoot();
         })
-        .catch(e => console.log('Error logging out of Facebook', e));
+        .catch(e => console.error('Error logging out of Facebook', e));
   }
 
   getUserFriends() {
@@ -137,16 +137,16 @@ export class UserProvider {
             if (this.verbose) console.log("adding url to data ", friendData['picture']);
 
           })
-          .catch(e => console.log("Error getting user's picture", e));
+          .catch(e => console.error("Error getting user's picture", e));
 
           this.userFriends.push(friendData)
 
         })
-        .catch(e => console.log("Error getting user's friend's information", e));
+        .catch(e => console.error("Error getting user's friend's information", e));
       
       }
     })
-    .catch(e => console.log("Error geting user's friends", e));
+    .catch(e => console.error("Error geting user's friends", e));
     
   }
 
