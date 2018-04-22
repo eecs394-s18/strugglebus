@@ -41,34 +41,34 @@ export class UserProvider {
 
   // Log in and log out methods
   login(navCtrl: NavController, loading) {
-    
+
     if (this.verbose) console.log("Login method called");
 
     this.fb.login(['public_profile', 'user_friends', 'email'])
     .then(response => {
-      
+
       // Authenticate with firebase
       // Create credential object to pass to firebase
       const facebookCredential = firebase.auth.FacebookAuthProvider
       .credential(response.authResponse.accessToken);
-      
+
       if (this.verbose) {
         console.log("FB Credential: " + facebookCredential);
       }
 
       firebase.auth().signInWithCredential(facebookCredential)
       .then( success => {
-        
+
         if (this.verbose) console.log("Firebase success: " + JSON.stringify(success));
-        
+
         this.fb.api('me?fields=id,name,email,first_name,last_name,picture.width(720).height(720).as(picture_large)', [])
         .then(profile => {
-          this.userData = { 
+          this.userData = {
             id: profile['id'],
-            email: profile['email'], 
-            first_name: profile['first_name'], 
-            last_name: profile['last_name'], 
-            picture: profile['picture_large']['data']['url'], 
+            email: profile['email'],
+            first_name: profile['first_name'],
+            last_name: profile['last_name'],
+            picture: profile['picture_large']['data']['url'],
             username: profile['name']
           };
 
@@ -84,7 +84,7 @@ export class UserProvider {
         //   loading.dismiss();
         //   navCtrl.push(TabsPage, {});
         // });
-      });      
+      });
     })
     .catch(e => {
       console.error('Error logging into Facebook', e);
@@ -115,21 +115,21 @@ export class UserProvider {
       this.userFriendIDs = ids;
       for (var i=0; i < ids.length; i++) {
         if (this.verbose)  console.log("trying to get friends info for id: ", ids[i]);
-        
+
         var path = '/' + ids[i];
-        
+
         if (this.verbose) console.log("with path ", path);
-        
+
         this.fb.api(path, [])
         .then(profile => {
 
-          var friendData = { 
-            id: ids[i],
+          var friendData = {
+            id: profile['id'],
             name: profile['name']
           };
-
-          if (this.verbose) console.log("path ", path + '/picture?redirect=0');
-          this.fb.api(path + '/picture?redirect=0', [])
+          var friendPath = '/' + friendData.id;
+          if (this.verbose) console.log("path ", friendPath + '/picture?redirect=0');
+          this.fb.api(friendPath + '/picture?redirect=0', [])
           .then(data => {
 
             if (this.verbose) console.log("data keys are: ", Object.keys(data));
@@ -143,11 +143,11 @@ export class UserProvider {
 
         })
         .catch(e => console.error("Error getting user's friend's information", e));
-      
+
       }
     })
     .catch(e => console.error("Error geting user's friends", e));
-    
+
   }
 
 
