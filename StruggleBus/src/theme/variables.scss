@@ -42,7 +42,7 @@ $colors: (
   white: 	  #ffffff,
   NU: 		  #4d2e82,
   inactive:   #D3C6C6
-	
+
 );
 
 
@@ -50,7 +50,7 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-// Nav bar 
+// Nav bar
 $toolbar-ios-button-color: color($colors, white);
 
 // Search bar
@@ -67,7 +67,7 @@ $searchbar-ios-input-placeholder-color: color($colors, NU);
 // Material Design only Sass variables can go here
 
 
-// Nav bar 
+// Nav bar
 $toolbar-md-button-color: color($colors, white);
 
 // Search bar
@@ -81,7 +81,7 @@ $searchbar-md-input-placeholder-color: color($colors, NU);
 // Windows only Sass variables can go here
 
 
-// Nav bar 
+// Nav bar
 $toolbar-wp-button-color: color($colors, white);
 
 // Search bar

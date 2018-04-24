@@ -11,13 +11,13 @@ import { DatabaseProvider } from "../../providers/database/database";
 })
 export class SigninPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
               public userProvider: UserProvider, public loadingCtrl: LoadingController, public db: DatabaseProvider) {
   }
 
   login() {
     let loading = this.loadingCtrl.create({
-        content: 'Retrieving your Facebook data...'
+        content: 'One moment please...'
     });
 
     loading.present();
