@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { SettingsPage } from '../pages/settings/settings';
+import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPage } from '../pages/signin/signin';
@@ -38,7 +39,8 @@ import { CourseCard } from '../components/course-card/course-card'
     TabsPage,
     SigninPage,
     CoursePage,
-    CourseCard
+    CourseCard,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { CourseCard } from '../components/course-card/course-card'
     TabsPage,
     SigninPage,
     CoursePage,
-    CourseCard
+    CourseCard,
+    ProfilePage
   ],
   providers: [
     StatusBar,

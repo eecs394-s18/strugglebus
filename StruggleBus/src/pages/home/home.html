@@ -37,11 +37,11 @@
 <ion-list >
 
     <ion-list-header> My Friends on StruggleBus  </ion-list-header>
-    <ion-item class="text" *ngFor="let friend of userFriends">
+    <ion-item class="text" *ngFor="let friend of userFriends" (click)="onFriendSelect(friend)">
       <ion-label>{{ friend.name }}</ion-label>
       <!-- <ion-note item-end>{{ friend.id }}</ion-note> -->
       <ion-avatar item-start>
-        <img [src]="friend.picture">
+        <img [src]="friend.picture" >
       </ion-avatar>
     </ion-item>
 
