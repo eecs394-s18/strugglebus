@@ -18,18 +18,20 @@
   <ion-item class="text"> Subject: {{ (courseInfo | async)?.subject }} </ion-item>
   <ion-item class="text"> Term: {{ (courseInfo | async)?.term }} </ion-item>
 
-  <div *ngIf="(friends_interested | async)?.length">
-    <ion-list-header> Facebook Friends Interested:  </ion-list-header>
-    <ion-item class="text" *ngFor="let friend of friends_interested | async">
-        {{ friend.name }}
-    </ion-item>
-  </div>
 
   <button ion-button *ngIf="!hasCourse" block color="NU" (click)=addUser()> I'M INTERESTED </button>
 
   <br/>
   <div text-center *ngIf="hasCourse">You're currently interested in this course.</div>
   <button ion-button *ngIf="hasCourse" block color="NU" (click)=removeUser()> NOT INTERESTED </button>
+
+  <ion-list-header> Facebook Friends Interested:  </ion-list-header>
+  <ion-item class="text" *ngFor="let friend of friends_interested">
+      <ion-label>{{ friend.name }}</ion-label>
+      <ion-avatar item-start>
+        <img [src]="friend.picture" >
+      </ion-avatar>
+  </ion-item>
 
 	<ion-list-header> People Interested:  </ion-list-header>
 	<ion-item class="text" *ngFor="let person of people_interested | async">
