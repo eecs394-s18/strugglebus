@@ -55,9 +55,6 @@ export class CoursePage implements OnInit {
 			this.people_interested = this.db.getPeopleInterested(this.quarter, this.course)
 			.map(people => {
 
-				// console.log(people)
-				// console.log(Object.keys(people))
-			
 				var interested = []
 				this.friends_interested = []
 
@@ -65,10 +62,15 @@ export class CoursePage implements OnInit {
 					
 					var key = Object.keys(people)[i]
 					
-					// console.log("adding to people intereseted: ", people[key])
+					// check if this is the current user 
+					if (key == this.user_id) { continue }
+
+					// check if person is FB freind
 					if (this.userService.userFriendIDs.indexOf(key) > -1) {
-						// console.log("adding to friends intereseted: ", people[key])
-						this.friends_interested.push(people[key])
+						var user = this.userService.userFriends.filter(user => user.id == key)
+						this.friends_interested.push(user[0])
+					
+					// not current user and not FB friend
 					} else {
 						interested.push(people[key])
 					}

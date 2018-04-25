@@ -27,7 +27,10 @@
 
   <ion-list-header> Facebook Friends Interested:  </ion-list-header>
   <ion-item class="text" *ngFor="let friend of friends_interested">
-      {{ friend.name }}
+      <ion-label>{{ friend.name }}</ion-label>
+      <ion-avatar item-start>
+        <img [src]="friend.picture" >
+      </ion-avatar>
   </ion-item>
 
 	<ion-list-header> People Interested:  </ion-list-header>
