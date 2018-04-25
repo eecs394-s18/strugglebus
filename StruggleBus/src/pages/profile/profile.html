@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title text-center>
-      <p class="nav-title">FRIEND NAME</p>
+  <ion-navbar align-title="center">
+    <ion-title>
+      <p class="nav-title" *ngIf="userData">{{ userData.name }}</p>
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -9,14 +9,14 @@
 
 <ion-content text-center>
 
-	<ion-card *ngIf="userData">
-	    <ion-card-header>{{ userData.name }}</ion-card-header>
-      <img class="profile-pic" [src]="userData.picture"/>
-	</ion-card>
+  <ion-card *ngIf="userData">
+    <ion-card-header>{{ userData.name }}</ion-card-header>
+    <img class="profile-pic" [src]="userData.picture" />
+  </ion-card>
 
   <ion-list *ngIf="userData && userCourses">
-    <ion-list-header> {{ userData.name }}'s Classes  </ion-list-header>
-    <ion-item *ngFor="let course of userCourses[quarter]" text-wrap>
+    <ion-list-header> {{ userData.name }}'s Classes </ion-list-header>
+    <ion-item *ngFor="let course of userCourses[quarter]" text-wrap (click)="onSelect(course)">
       {{course}}
     </ion-item>
 
