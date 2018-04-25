@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
+import { SearchPage } from '../pages/search/search';
 import { SettingsPage } from '../pages/settings/settings';
 import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
@@ -22,7 +22,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { DatabaseProvider } from '../providers/database/database';
 
-import { environment } from '../enviornments/environment';
+import { environment } from '../environments/environment';
 
 import { Facebook } from '@ionic-native/facebook';
 import { UserProvider } from '../providers/user/user';
@@ -33,7 +33,7 @@ import { CourseCard } from '../components/course-card/course-card'
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
+    SearchPage,
     SettingsPage,
     HomePage,
     TabsPage,
@@ -53,7 +53,7 @@ import { CourseCard } from '../components/course-card/course-card'
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    SearchPage,
     SettingsPage,
     HomePage,
     TabsPage,

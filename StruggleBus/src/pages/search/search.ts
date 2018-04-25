@@ -6,12 +6,12 @@ import { Course } from "../../providers/database/database";
 import { QuarterPipe } from '../../pipes/quarter/quarter';
 
 @Component({
-  selector: 'page-about',
-  templateUrl: 'about.html',
+  selector: 'page-search',
+  templateUrl: 'search.html',
   providers: [QuarterPipe]
 })
 
-export class AboutPage implements OnInit {
+export class SearchPage implements OnInit {
 
   quarter: string;
   courses: Course[];
