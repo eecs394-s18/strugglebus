@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { AboutPage } from '../about/about';
+import { SearchPage } from '../search/search';
 import { ProfilePage } from '../profile/profile';
 import { QuarterPipe } from '../../pipes/quarter/quarter';
 import { UserProvider } from '../../providers/user/user';
@@ -21,7 +21,7 @@ import { CoursePage } from '../course/course';
 })
 export class HomePage implements OnInit {
 
-  aboutPage = AboutPage;
+  searchPage = SearchPage;
   userData: any;
   // userCourses: Course[]
   userCourses: any[]
@@ -83,7 +83,7 @@ export class HomePage implements OnInit {
 
 
   addClasses() {
-  	this.navCtrl.push(this.aboutPage,  {
+  	this.navCtrl.push(this.searchPage,  {
       quarter: this.currentQuarter
     });
   }
