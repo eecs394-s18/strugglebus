@@ -3,8 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
+import { SearchPage } from '../pages/search/search';
 import { SettingsPage } from '../pages/settings/settings';
+import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPage } from '../pages/signin/signin';
@@ -21,7 +22,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { DatabaseProvider } from '../providers/database/database';
 
-import { environment } from '../enviornments/environment';
+import { environment } from '../environments/environment';
 
 import { Facebook } from '@ionic-native/facebook';
 import { UserProvider } from '../providers/user/user';
@@ -32,13 +33,14 @@ import { CourseCard } from '../components/course-card/course-card'
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
+    SearchPage,
     SettingsPage,
     HomePage,
     TabsPage,
     SigninPage,
     CoursePage,
-    CourseCard
+    CourseCard,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -51,13 +53,14 @@ import { CourseCard } from '../components/course-card/course-card'
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    SearchPage,
     SettingsPage,
     HomePage,
     TabsPage,
     SigninPage,
     CoursePage,
-    CourseCard
+    CourseCard,
+    ProfilePage
   ],
   providers: [
     StatusBar,

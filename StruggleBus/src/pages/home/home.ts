@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { AboutPage } from '../about/about';
+import { SearchPage } from '../search/search';
+import { ProfilePage } from '../profile/profile';
 import { QuarterPipe } from '../../pipes/quarter/quarter';
 import { UserProvider } from '../../providers/user/user';
 import { DatabaseProvider, Quarter } from '../../providers/database/database';
@@ -20,7 +21,7 @@ import { CoursePage } from '../course/course';
 })
 export class HomePage implements OnInit {
 
-  aboutPage = AboutPage;
+  searchPage = SearchPage;
   userData: any;
   // userCourses: Course[]
   userCourses: any[]
@@ -56,7 +57,7 @@ export class HomePage implements OnInit {
         //     '2018_spring': {'course1':0, 'course2':0,...},
         //     '2018_winter': ...
         //   }
-        // }, 
+        // },
 
         this.userCourses = []; // important, list doesn't render without this line
         let quarters = ci['courses_interested']
@@ -82,7 +83,7 @@ export class HomePage implements OnInit {
 
 
   addClasses() {
-  	this.navCtrl.push(this.aboutPage,  {
+  	this.navCtrl.push(this.searchPage,  {
       quarter: this.currentQuarter
     });
   }
@@ -104,6 +105,13 @@ export class HomePage implements OnInit {
     })
   }
 
+  onFriendSelect(friend): void /*Friend data obj, user.ts:126*/ {
+    this.navCtrl.push(ProfilePage, {
+      //Consider including all quarters, for now we show selected quarter.
+      quarter: this.currentQuarter,
+      user: friend
+    })
+  }
 
 
 }
