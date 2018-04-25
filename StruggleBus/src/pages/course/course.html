@@ -2,7 +2,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title text-center> 
+    <ion-title text-center>
      <p class="nav-title">{{ (courseInfo | async)?.subject }} {{ (courseInfo | async)?.abbv }}</p>
     </ion-title>
   </ion-navbar>
@@ -31,7 +31,12 @@
   <div text-center *ngIf="hasCourse">You're currently interested in this course.</div>
   <button ion-button *ngIf="hasCourse" block color="NU" (click)=removeUser()> NOT INTERESTED </button>
 
-	<ion-list-header> People Interested:  </ion-list-header>
+  <ion-list-header> Friends Interested:  </ion-list-header>
+	<ion-item class="text" *ngFor="let person of friends_interested | async">
+      {{ person.name }}
+  </ion-item>
+
+	<ion-list-header> Others Interested:  </ion-list-header>
 	<ion-item class="text" *ngFor="let person of people_interested | async">
       {{ person.name }}
   </ion-item>
