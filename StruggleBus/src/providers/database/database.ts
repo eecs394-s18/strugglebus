@@ -58,8 +58,8 @@ export class DatabaseProvider {
   	}
 
   	getPeopleInterested(quarter, course) {
-  		let path: string = '/quarters/' + quarter + '/' + course + '/people_interested';
-  		return this.db.list(path).valueChanges();
+  		let path: string = `/quarters/${quarter}/${course}/people_interested`;
+  		return this.db.object(path).valueChanges();
   	}
 
     getUserCourse(quarter, course, id) {

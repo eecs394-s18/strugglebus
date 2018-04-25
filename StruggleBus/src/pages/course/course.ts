@@ -16,19 +16,19 @@ export class CoursePage implements OnInit {
 	quarter: string;
 	course: string;
 	courseInfo: Observable<any>;
-	people_interested: Observable<any[]>;
-  friends_interested: any;
+	people_interested: Observable<{}>;
+  	friends_interested: any = [];
 
 	hasCourse: boolean;
-  user_id: string;
-  user_name: string;
+  	user_id: string;
+ 	user_name: string;
 	
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db: DatabaseProvider, userService: UserProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public db: DatabaseProvider, public userService: UserProvider) {
 		this.quarter = navParams.get('quarter');
 		this.course = navParams.get('course');
-    this.user_id = userService.userData['id'];
-    this.user_name = userService.userData['name'];
+    	this.user_id = userService.userData['id'];
+    	this.user_name = userService.userData['name'];
 		// let loader = navParams.get('loader');
 		
   }
@@ -54,7 +54,27 @@ export class CoursePage implements OnInit {
 
 			this.people_interested = this.db.getPeopleInterested(this.quarter, this.course)
 			.map(people => {
-				return people;
+
+				// console.log(people)
+				// console.log(Object.keys(people))
+			
+				var interested = []
+				this.friends_interested = []
+
+				for (var i=0; i < Object.keys(people).length; i++) {
+					
+					var key = Object.keys(people)[i]
+					
+					// console.log("adding to people intereseted: ", people[key])
+					if (this.userService.userFriendIDs.indexOf(key) > -1) {
+						// console.log("adding to friends intereseted: ", people[key])
+						this.friends_interested.push(people[key])
+					} else {
+						interested.push(people[key])
+					}
+				}
+
+				return interested;
 			});
 
 			// checking if user already has course and accordingly disabling button
@@ -65,13 +85,17 @@ export class CoursePage implements OnInit {
 				} else{
 					this.hasCourse = true
 				}
-			})
+			});
 															
 			this.people_interested.subscribe(people => {
-				for (var i=0; i < people.length; i++) {
-					if ( people[i].name == this.user_id) {  this.hasCourse = true; }
+
+				for (var key in Object.keys(people)) {
+					if (key == this.user_id) { this.hasCourse = true; }
 				}
-    });
+				// for (var i=0; i < people.length; i++) {
+				// 	if ( people[i].name == this.user_id) {  this.hasCourse = true; }
+				// }
+    		});
 
 
   }
