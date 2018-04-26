@@ -5,7 +5,7 @@ import { TabsPage } from '../../pages/tabs/tabs';
 import firebase from 'firebase';
 
 import { DatabaseProvider } from "../database/database"
-
+import { Observable } from "rxjs/Observable"
 
 @Injectable()
 export class UserProvider {
@@ -150,6 +150,18 @@ export class UserProvider {
 
   }
 
+
+  getUserPictureUrl(user_id: string): Observable<string> {
+    return Observable.fromPromise(
+      this.fb.api(`/${user_id}/picture?redirect=false`, [])
+      .then( res => {
+        return res.data.url
+      })
+      .catch( err => {
+        console.error(err, `Error getting user_id: ${user_id} profile `)
+      })
+    )
+  }
 
   /*
   // FB Graph API call method to get user info
