@@ -44,7 +44,7 @@ export class SearchPage implements OnInit {
     if (this.searchTerm && this.searchTerm.trim() != '') { // null check
       this.filteredItems = this.filteredItems.filter((course) => {
         let title = course.subject + ' ' + course.abbv; // construct string title
-        return title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 || course.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        return title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 || course.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1 || title.replace(/_/g, " ").toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
       });
     }
 
