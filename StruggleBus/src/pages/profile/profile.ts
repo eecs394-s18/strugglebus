@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
-import { DatabaseProvider } from '../../providers/database/database';
+import { Course, DatabaseProvider } from '../../providers/database/database';
 import { CoursePage } from '../course/course';
 
 @Component({
@@ -18,20 +18,10 @@ export class ProfilePage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserProvider, public db: DatabaseProvider) {
     this.fbData = navParams.get('user');
     this.quarter = navParams.get('quarter');
-    // this.userData = userService.userData;
   }
 
   ngOnInit() {
-    // this.userData = this.db.getUser(this.fbData.id, this.fbData.name);
-    this.db.getUser(this.fbData.id, this.fbData.name)
-      .subscribe(user => {
-        this.userData = user;
-        this.userCourses = []; // important, list doesn't render without this line
-        let quarters = user['courses_interested']
-        for (let q in quarters) {
-          this.userCourses[q] = Object.keys(quarters[q])
-        }
-      })
+    this.userData = this.db.getUser(this.fbData.id, this.fbData.name);
     console.log(this.fbData);
   }
 
@@ -39,11 +29,10 @@ export class ProfilePage implements OnInit {
     this.navCtrl.push(CoursePage, {
       quarter: this.quarter,
       course: course
-      // course: course.subject + '_' + course.abbv
     })
   }
 
-  isString(val) { return typeof val === 'string'; }
+  isString(val): boolean { return typeof val === 'string'; }
   getKeys(obj) {
     let keys = []
     for (let key in obj) {

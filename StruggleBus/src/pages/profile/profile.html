@@ -8,16 +8,14 @@
 
 
 <ion-content text-center>
-
-  <ion-card *ngIf="fbData">
-    <ion-card-header>{{ fbData.name }}</ion-card-header>
+  <div class="img-wrapper">
     <img *ngIf="isString(fbData.picture)" class="profile-pic" [src]="fbData.picture" />
     <img *ngIf="!isString(fbData.picture)" class="profile-pic" [src]="fbData.picture | async" />
-  </ion-card>
+  </div>
 
-  <ion-list *ngIf="userData && userCourses">
-    <ion-list-header> {{ userData.name }}'s Classes </ion-list-header>
-    <ion-item *ngFor="let course of userCourses[quarter]" text-wrap (click)="onSelect(course)">
+  <ion-list *ngIf="(userData | async) as user">
+    <ion-list-header> {{ user.name }}'s Classes </ion-list-header>
+    <ion-item *ngFor="let course of getKeys(user.courses_interested[quarter])" text-wrap (click)="onSelect(course)">
       {{course}}
     </ion-item>
 
