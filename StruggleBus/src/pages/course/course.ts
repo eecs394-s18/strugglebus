@@ -72,21 +72,10 @@ export class CoursePage implements OnInit {
 				
 				// not current user and not FB friend
 				} else { 
-					// this.userService.getUserPictureUrl(key)
-					// .then(url => {
-					// 	interested.push({ // making sure people_interested has ids
-					// 		id: key,
-					// 		name: people[key].name,
-					// 		picture: url
-					// 	})
-					// })
 					interested.push({ // making sure people_interested has ids
 						id: key,
 						name: people[key].name,
-						picture: this.userService.getUserPictureUrl(key).subscribe(url => {
-							console.log(url) // debug
-							return url
-						})
+						picture: this.userService.getUserPictureUrl(key) // Pulling photo from fb api
 					})
 				}
 			}
