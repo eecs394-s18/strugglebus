@@ -22,6 +22,7 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    // this.userData = this.db.getUser(this.fbData.id, this.fbData.name);
     this.db.getUser(this.fbData.id, this.fbData.name)
       .subscribe(user => {
         this.userData = user;
@@ -40,5 +41,14 @@ export class ProfilePage implements OnInit {
       course: course
       // course: course.subject + '_' + course.abbv
     })
+  }
+
+  isString(val) { return typeof val === 'string'; }
+  getKeys(obj) {
+    let keys = []
+    for (let key in obj) {
+      keys.push(key);
+    }
+    return keys;
   }
 }
