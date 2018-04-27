@@ -26,7 +26,7 @@
   <button ion-button *ngIf="hasCourse" block color="NU" (click)=removeUser()> NOT INTERESTED </button>
 
   <ion-list-header> Facebook Friends Interested:  </ion-list-header>
-  <ion-item class="text" *ngFor="let friend of friends_interested">
+  <ion-item class="text" *ngFor="let friend of friends_interested" (click)="onFriendClick(friend)">
       <ion-label>{{ friend.name }}</ion-label>
       <ion-avatar item-start>
         <img [src]="friend.picture" >
@@ -34,8 +34,11 @@
   </ion-item>
 
 	<ion-list-header> People Interested:  </ion-list-header>
-	<ion-item class="text" *ngFor="let person of people_interested | async">
-      {{ person.name }}
+	<ion-item class="text" *ngFor="let person of people_interested | async" (click)="onFriendClick(person)">
+      <ion-label>{{ person.name }}</ion-label>
+      <ion-avatar item-start>
+        <img [src]="person.picture | async" />
+      </ion-avatar>
   </ion-item>
 
 </ion-content>
