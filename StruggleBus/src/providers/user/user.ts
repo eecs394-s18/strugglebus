@@ -80,10 +80,6 @@ export class UserProvider {
             navCtrl.push(TabsPage, {});
           })
         })
-        // .then(() => {
-        //   loading.dismiss();
-        //   navCtrl.push(TabsPage, {});
-        // });
       });
     })
     .catch(e => {
