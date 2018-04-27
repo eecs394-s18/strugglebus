@@ -129,7 +129,7 @@ export class UserProvider {
           };
           var friendPath = '/' + friendData.id;
           if (this.verbose) console.log("path ", friendPath + '/picture?redirect=0');
-          this.fb.api(friendPath + '/picture?redirect=0', [])
+          this.fb.api(friendPath + '/picture?redirect=0&type=large', [])
           .then(data => {
 
             if (this.verbose) console.log("data keys are: ", Object.keys(data));
@@ -153,7 +153,7 @@ export class UserProvider {
 
   getUserPictureUrl(user_id: string): Observable<string> {
     return Observable.fromPromise(
-      this.fb.api(`/${user_id}/picture?redirect=false`, [])
+      this.fb.api(`/${user_id}/picture?redirect=false&type=large`, [])
       .then( res => {
         return res.data.url
       })

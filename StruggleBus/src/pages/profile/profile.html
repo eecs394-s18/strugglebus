@@ -9,9 +9,10 @@
 
 <ion-content text-center>
 
-  <ion-card *ngIf="userData">
-    <ion-card-header>{{ userData.name }}</ion-card-header>
-    <img class="profile-pic" [src]="userData.picture" />
+  <ion-card *ngIf="fbData">
+    <ion-card-header>{{ fbData.name }}</ion-card-header>
+    <img *ngIf="isString(fbData.picture)" class="profile-pic" [src]="fbData.picture" />
+    <img *ngIf="!isString(fbData.picture)" class="profile-pic" [src]="fbData.picture | async" />
   </ion-card>
 
   <ion-list *ngIf="userData && userCourses">
