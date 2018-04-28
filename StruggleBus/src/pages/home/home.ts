@@ -6,9 +6,10 @@ import { ProfilePage } from '../profile/profile';
 import { QuarterPipe } from '../../pipes/quarter/quarter';
 import { UserProvider } from '../../providers/user/user';
 import { DatabaseProvider, Quarter } from '../../providers/database/database';
-import { PipesModule} from '../../pipes/pipes.module'
+import { PipesModule } from '../../pipes/pipes.module'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { Platform } from 'ionic-angular';
 
 import { Course } from "../../providers/database/database";
 import { CoursePage } from '../course/course';
@@ -29,8 +30,9 @@ export class HomePage implements OnInit {
   quarters: Quarter[];
   currentQuarter: string;
   debug: boolean = false
+  public unregisterBackButtonAction: any; // callback of the event handler to unsubscribe to it when leaving this page
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, userService: UserProvider, public db: DatabaseProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, userService: UserProvider, public db: DatabaseProvider, public platform: Platform) {
 
     this.userData = userService.userData;
 
@@ -49,41 +51,41 @@ export class HomePage implements OnInit {
 
     if (this.userData) {
       this.db.getUser(this.userData['id'], this.userData['name'])
-      .subscribe(ci => {
-        // if (this.debug) console.log("Output of getUser is: ", JSON.stringify(ci));
-        // fyi:
-        // ci  = {
-        //   'courses_interested':{
-        //     '2018_spring': {'course1':0, 'course2':0,...},
-        //     '2018_winter': ...
-        //   }
-        // },
+        .subscribe(ci => {
+          // if (this.debug) console.log("Output of getUser is: ", JSON.stringify(ci));
+          // fyi:
+          // ci  = {
+          //   'courses_interested':{
+          //     '2018_spring': {'course1':0, 'course2':0,...},
+          //     '2018_winter': ...
+          //   }
+          // },
 
-        this.userCourses = []; // important, list doesn't render without this line
-        let quarters = ci['courses_interested']
-        for (let quarter in quarters) {
-          this.userCourses[quarter] = Object.keys(quarters[quarter])
-          // .map(courseName => {
-          //   if (this.debug) console.log("courseName taken is", courseName)
-          //   return this.db.getCourseInfo(quarter, courseName)
-          //   // .subscribe(courseInfo => {
-          //   //   if (this.debug) console.log("courseInfo gotten is", JSON.stringify(courseInfo))
-          //   // })
-          //   .map(c => {
-          //     if (this.debug) console.log("courseInfo gotten is", JSON.stringify(c))
-          //     return new Course(c[0], c[1], [2], c[3], c[4], c[5])
-          //   })
-          // })
-        }
+          this.userCourses = []; // important, list doesn't render without this line
+          let quarters = ci['courses_interested']
+          for (let quarter in quarters) {
+            this.userCourses[quarter] = Object.keys(quarters[quarter])
+            // .map(courseName => {
+            //   if (this.debug) console.log("courseName taken is", courseName)
+            //   return this.db.getCourseInfo(quarter, courseName)
+            //   // .subscribe(courseInfo => {
+            //   //   if (this.debug) console.log("courseInfo gotten is", JSON.stringify(courseInfo))
+            //   // })
+            //   .map(c => {
+            //     if (this.debug) console.log("courseInfo gotten is", JSON.stringify(c))
+            //     return new Course(c[0], c[1], [2], c[3], c[4], c[5])
+            //   })
+            // })
+          }
 
-        if (this.debug) console.log("this.userCourses is: ", JSON.stringify(this.userCourses));
-      });
+          if (this.debug) console.log("this.userCourses is: ", JSON.stringify(this.userCourses));
+        });
     }
   }
 
 
   addClasses() {
-  	this.navCtrl.push(this.searchPage,  {
+    this.navCtrl.push(this.searchPage, {
       quarter: this.currentQuarter
     });
   }
@@ -112,6 +114,27 @@ export class HomePage implements OnInit {
       user: friend
     })
   }
+
+
+  ionViewDidEnter() {
+    this.initializeBackButtonCustomHandler();
+  }
+
+  ionViewWillLeave() {
+    // Unregister the custom back button action for this page
+    this.unregisterBackButtonAction && this.unregisterBackButtonAction();
+  }
+
+  public initializeBackButtonCustomHandler(): void {
+    this.unregisterBackButtonAction = this.platform.registerBackButtonAction(function (event) {
+       console.log('Entered')
+      });
+  }
+
+  private customHandleBackButton(): void {
+    // do what you need to do here ...
+  }
+
 
 
 }
