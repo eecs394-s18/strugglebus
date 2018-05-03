@@ -1,9 +1,8 @@
-
 <ion-header>
 
   <ion-navbar align-title="center">
     <ion-title>
-     <p class="nav-title">{{ (courseInfo | async)?.subject }} {{ (courseInfo | async)?.abbv }}</p>
+      <p class="nav-title">{{ (courseInfo | async)?.subject }} {{ (courseInfo | async)?.abbv }}</p>
     </ion-title>
   </ion-navbar>
 
@@ -13,10 +12,7 @@
 <ion-content padding>
 
   <ion-item class="text"> Name: {{ (courseInfo | async)?.name }} </ion-item>
-  <ion-item class="text"> Abbv: {{ (courseInfo | async)?.abbv }} </ion-item>
   <ion-item class="text"> School: {{ (courseInfo | async)?.school }} </ion-item>
-  <ion-item class="text"> Subject: {{ (courseInfo | async)?.subject }} </ion-item>
-  <ion-item class="text"> Term: {{ (courseInfo | async)?.term }} </ion-item>
 
 
   <button ion-button *ngIf="!hasCourse" block color="NU" (click)=addUser()> I'M INTERESTED </button>
@@ -25,20 +21,25 @@
   <div text-center *ngIf="hasCourse">You're currently interested in this course.</div>
   <button ion-button *ngIf="hasCourse" block color="NU" (click)=removeUser()> NOT INTERESTED </button>
 
-  <ion-list-header> Facebook Friends Interested:  </ion-list-header>
-  <ion-item class="text" *ngFor="let friend of friends_interested" (click)="onFriendClick(friend)">
+  <ion-list *ngIf="friends_interested">
+    <ion-list-header *ngIf="friends_interested.length !== 0">Facebook Friends Interested:</ion-list-header>
+    <ion-item class="text" *ngFor="let friend of friends_interested" (click)="onFriendClick(friend)">
       <ion-label>{{ friend.name }}</ion-label>
       <ion-avatar item-start>
-        <img [src]="friend.picture" >
+        <img [src]="friend.picture">
       </ion-avatar>
-  </ion-item>
+    </ion-item>
+  </ion-list>
 
-	<ion-list-header> People Interested:  </ion-list-header>
-	<ion-item class="text" *ngFor="let person of people_interested | async" (click)="onFriendClick(person)">
+  <ion-list *ngIf="(people_interested | async) as pi">
+    <ion-list-header *ngIf="pi.length !== 0">People Interested:</ion-list-header>
+    <ion-item class="text" *ngFor="let person of pi" (click)="onFriendClick(person)">
       <ion-label>{{ person.name }}</ion-label>
       <ion-avatar item-start>
         <img [src]="person.picture | async" />
       </ion-avatar>
-  </ion-item>
+    </ion-item>
+  </ion-list>
+
 
 </ion-content>
