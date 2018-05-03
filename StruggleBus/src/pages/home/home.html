@@ -25,7 +25,8 @@
         </ion-option>
       </ion-select>
     </ion-list-header>
-    <button ion-item *ngFor="let course of userCourses[currentQuarter]" text-wrap (click)="onSelect(course)">
+    <ion-item *ngIf="!userCourses[currentQuarter] else list_of_courses" style="margin-bottom:2%">Nothing yet!</ion-item>
+    <button #list_of_courses ion-item *ngFor="let course of userCourses[currentQuarter]" text-wrap (click)="onSelect(course)">
       {{course}}
     </button>
 

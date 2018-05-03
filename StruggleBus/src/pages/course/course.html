@@ -11,9 +11,22 @@
 
 <ion-content padding>
 
-  <ion-item class="text"> Name: {{ (courseInfo | async)?.name }} </ion-item>
-  <ion-item class="text"> School: {{ (courseInfo | async)?.school }} </ion-item>
-
+<ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-auto margin-vertical>Name:  </ion-col>
+      <ion-col col-9>
+        <ion-item class="text" text-wrap>{{ (courseInfo | async)?.name }}</ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-auto margin-vertical>School:</ion-col>
+      <ion-col col-9>
+        <ion-item class="text" text-wrap>{{ (courseInfo | async)?.school }}</ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
 
   <button ion-button *ngIf="!hasCourse" block color="NU" (click)=addUser()> I'M INTERESTED </button>
 
