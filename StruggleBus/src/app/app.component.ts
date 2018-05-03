@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -14,6 +14,7 @@ import firebase from 'firebase';
   templateUrl: 'app.html'
 })
 export class MyApp {
+  // @ViewChild('myNav') nav: NavController
   rootPage:any = SigninPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
@@ -30,7 +31,7 @@ export class MyApp {
 
     firebase.initializeApp(firebase_test_config);
 
-
+    //This doesn't do anything right now.
     if (!userProvider.checkLoggedIn()) {
       this.rootPage = SigninPage;
     } else {
@@ -44,4 +45,15 @@ export class MyApp {
       splashScreen.hide();
     });
   }
+  // ngOnInit() {
+  //   //The code to save sign in status, but need to refactor code to save user data to firebase
+  //   //https://firebase.google.com/docs/auth/web/manage-users
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     if(user){
+  //       this.nav.setRoot(TabsPage, this.userData);
+  //     }else{
+  //       this.nav.setRoot(SigninPage);
+  //     }
+  //  });
+  // }
 }

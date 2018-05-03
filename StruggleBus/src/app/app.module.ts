@@ -19,7 +19,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { DatabaseProvider } from '../providers/database/database';
 
 import { environment } from '../environments/environment';
@@ -65,7 +65,6 @@ import { CourseCard } from '../components/course-card/course-card'
   providers: [
     StatusBar,
     SplashScreen,
-    AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
     Facebook,
