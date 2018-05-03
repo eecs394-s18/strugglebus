@@ -5,7 +5,6 @@
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
 
-
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
@@ -112,5 +111,34 @@ $searchbar-wp-input-placeholder-color: color($colors, NU);
 // Fonts
 // --------------------------------------------------
 
-@import "roboto";
-@import "noto-sans";
+// @import "roboto";
+// @import "noto-sans";
+@font-face {
+     font-family: "Century Gothic";
+     font-style: "normal";
+     font-weight: "normal";
+     src: url($font-path+'/century-gothic/GOTHIC.TTF') format('truetype');
+ }
+ // @font-face {
+ //      font-family: "Century Gothic";
+ //      font-style: "normal";
+ //      font-weight: "bold";
+ //      src: url($font-path+'/century-gothic/GOTHICB.TTF') format('truetype');
+ //  }
+ //  @font-face {
+ //       font-family: "Century Gothic";
+ //       font-style: "italic";
+ //       font-weight: "bold";
+ //       src: url($font-path+'/century-gothic/GOTHICBI.TTF') format('truetype');
+ //   }
+ //   @font-face {
+ //        font-family: "Century Gothic";
+ //        font-style: "italic";
+ //        font-weight: "normal";
+ //        src: url($font-path+'/century-gothic/GOTHICI.TTF') format('truetype');
+ //    }
+
+$font-family-base: "Century Gothic";
+ion-header,ion-content {
+  font-family: "Century Gothic" !important;
+}
