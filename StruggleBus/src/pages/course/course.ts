@@ -58,28 +58,29 @@ export class CoursePage implements OnInit {
 				var interested = []
 				this.friends_interested = []
 
-				for (var i = 0; i < Object.keys(people).length; i++) {
+				if(people){
+					for (var i = 0; i < Object.keys(people).length; i++) {
 
-					var key = Object.keys(people)[i]
+						var key = Object.keys(people)[i]
 
-					// check if this is the current user
-					if (key == this.user_id) { continue }
+						// check if this is the current user
+						if (key == this.user_id) { continue }
 
-					// check if person is FB freind
-					if (this.userService.userFriendIDs.indexOf(key) > -1) {
-						var user = this.userService.userFriends.filter(user => user.id == key)
-						this.friends_interested.push(user[0])
+						// check if person is FB freind
+						if (this.userService.userFriendIDs.indexOf(key) > -1) {
+							var user = this.userService.userFriends.filter(user => user.id == key)
+							this.friends_interested.push(user[0])
 
-						// not current user and not FB friend
-					} else {
-						interested.push({ // making sure people_interested has ids
-							id: key,
-							name: people[key].name,
-							picture: this.userService.getUserPictureUrl(key) // Pulling photo from fb api
-						})
+							// not current user and not FB friend
+						} else {
+							interested.push({ // making sure people_interested has ids
+								id: key,
+								name: people[key].name,
+								picture: this.userService.getUserPictureUrl(key) // Pulling photo from fb api
+							})
+						}
 					}
 				}
-
 				return interested;
 			});
 
